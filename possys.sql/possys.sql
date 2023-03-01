@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Feb 23, 2023 at 09:34 AM
+-- Generation Time: Mar 01, 2023 at 06:05 PM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -26,28 +26,25 @@ USE `possys`;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product`
+-- Table structure for table `products`
 --
 
-DROP TABLE IF EXISTS `product`;
-CREATE TABLE IF NOT EXISTS `product` (
-  `pid` varchar(255) DEFAULT NULL,
-  `pName` varchar(255) DEFAULT NULL,
-  `pPrice` float DEFAULT NULL,
-  `pQty` int DEFAULT NULL,
-  `pType` varchar(255) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+DROP TABLE IF EXISTS `products`;
+CREATE TABLE IF NOT EXISTS `products` (
+  `pid` int NOT NULL AUTO_INCREMENT,
+  `pName` varchar(64) DEFAULT 'UNKNOWN',
+  `pPrice` float DEFAULT '0',
+  `pQty` int DEFAULT '0',
+  `productImg` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`pid`)
+) ENGINE=MyISAM AUTO_INCREMENT=1063 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `product`
+-- Dumping data for table `products`
 --
 
-INSERT INTO `product` (`pid`, `pName`, `pPrice`, `pQty`, `pType`) VALUES
-('ID1001', 'Rice', 12.5, 50, 'Food'),
-('ID1002', 'Noodle', 2, 120, 'FOOD'),
-('ID1003', 'Laptop', 75, 10, 'Accessory'),
-('ID1005', 'WhoKnows', 10, 12, 'Meh'),
-('ID1006', 'WhoKNows', 1002, 102, 'Meh');
+INSERT INTO `products` (`pid`, `pName`, `pPrice`, `pQty`, `productImg`) VALUES
+(1054, 'Laptop', 700, 1, NULL);
 
 -- --------------------------------------------------------
 

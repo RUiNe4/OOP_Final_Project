@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7cebd4a5-0035-433d-8d5a-eaf870947d78" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/DatabaseFunction/QueryFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/DatabaseFunction/QueryFunction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/EmployeeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/LandingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/LandingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ProductManagement/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ProductManagement/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/Style/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/Style/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/landing-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/landing-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/product-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/product-view.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="7cebd4a5-0035-433d-8d5a-eaf870947d78" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -167,7 +156,7 @@
       <workItem from="1677321477450" duration="2143000" />
       <workItem from="1677331644144" duration="8105000" />
       <workItem from="1677640042911" duration="10816000" />
-      <workItem from="1677653811476" duration="30138000" />
+      <workItem from="1677653811476" duration="30463000" />
     </task>
     <servers />
   </component>
