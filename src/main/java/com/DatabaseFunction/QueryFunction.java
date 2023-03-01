@@ -38,7 +38,7 @@ public class QueryFunction extends DBConnection {
     st.setString(1, pid);
     resultSet = st.executeQuery();
     if (resultSet.next()) {
-      System.out.println("ID: " + resultSet.getInt("pid"));
+        System.out.println("ID: " + resultSet.getInt("pid"));
       System.out.println("Product name: " + resultSet.getString("pName"));
       System.out.println("Product Price: " + resultSet.getFloat("pPrice"));
       System.out.println("Product Quantity: " + resultSet.getInt("pQty"));

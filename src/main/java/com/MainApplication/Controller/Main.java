@@ -13,9 +13,6 @@ public class Main extends Application {
     Scene scene = new Scene(fxmlLoader.load());
     scene.getStylesheets().add(getClass().getResource("Style/styles.css").toExternalForm());
 
-//    stage.minWidthProperty().bind(scene.heightProperty().multiply(2));
-//    stage.minHeightProperty().bind(scene.widthProperty().divide(2));
-
     stage.setTitle("Hello!");
     stage.setScene(scene);
     stage.show();
