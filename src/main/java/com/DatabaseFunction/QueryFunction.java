@@ -1,8 +1,10 @@
 package com.DatabaseFunction;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import com.ProductManagement.Product;
+import javafx.scene.image.ImageView;
+
+import java.io.InputStream;
+import java.sql.*;
+
 public class QueryFunction extends DBConnection {
   private DBConnection con = new DBConnection();
   private final Statement statement;
@@ -21,68 +23,70 @@ public class QueryFunction extends DBConnection {
   }
 
   public void displayDB() throws Exception {
-    resultSet = statement.executeQuery("select * from product");
+    resultSet = statement.executeQuery("select * from products");
     while (resultSet.next()) {
       System.out.println("ID: " + resultSet.getString("pid"));
       System.out.println("Product name: " + resultSet.getString("pName"));
       System.out.println("Product Price: " + resultSet.getFloat("pPrice"));
       System.out.println("Product Quantity: " + resultSet.getInt("pQty"));
-      System.out.println("Product Type: " + resultSet.getString("pType"));
       System.out.println();
     }
   }
-
-  public void displayDB(String pid) throws Exception {
-    String searchStm = "select * from product where pid = ?";
-    st = connection.prepareStatement(searchStm);
-    st.setString(1, pid);
-    resultSet = st.executeQuery();
-    if (resultSet.next()) {
-      System.out.println("ID: " + resultSet.getInt("pid"));
-      System.out.println("Product name: " + resultSet.getString("pName"));
-      System.out.println("Product Price: " + resultSet.getFloat("pPrice"));
-      System.out.println("Product Quantity: " + resultSet.getInt("pQty"));
-      System.out.println("Product Type: " + resultSet.getString("pType"));
-    }
-  }
-  public void addItem(String pName, String pid, double pPrice, int pQty, String pType) throws Exception {
-    String insertStm = "insert into product (pName, pid, pPrice, pQty, pType) values (?, ?, ?, ?, ?)";
+//
+//  public void displayDB(int pid) throws Exception {
+//    String searchStm = "select * from product where pid = ?";
+//    st = connection.prepareStatement(searchStm);
+//    st.setInt(1, pid);
+//    resultSet = st.executeQuery();
+//    if (resultSet.next()) {
+//      System.out.println("ID: " + resultSet.getInt("pid"));
+//      System.out.println("Product name: " + resultSet.getString("pName"));
+//      System.out.println("Product Price: " + resultSet.getFloat("pPrice"));
+//      System.out.println("Product Quantity: " + resultSet.getInt("pQty"));
+//      System.out.println("Product Type: " + resultSet.getString("pType"));
+//    }
+//  }
+  protected void addQuery(String pName, double pPrice, int pQty, String imgSrc) throws Exception {
+    String insertStm = "insert into products (pName, pPrice, pQty, productImg) values (?, ?, ?, ?)";
     st = connection.prepareStatement(insertStm);
     st.setString(1, pName);
-    st.setString(2, pid);
-    st.setDouble(3, pPrice);
-    st.setInt(4, pQty);
-    st.setString(5, pType);
+    st.setDouble(2, pPrice);
+    st.setInt(3, pQty);
+    st.setString(4, imgSrc);
     st.executeUpdate();
   }
-  public void updateItemName(String name, String id) throws Exception {
-    String updateStm = "update product set pName = ? where pid = ?";
+  public void updateQuery(int id, String name) throws Exception {
+    String updateStm = "update products set pName = ? where pid = ?";
     st = connection.prepareStatement(updateStm);
     st.setString(1, name);
-    st.setString(2, id);
+    st.setInt(2, id);
     st.executeUpdate();
   }
 
-  public String searchItem(String pid) throws Exception {
-    String searchStm = "select * from product where pid = ?";
+  protected int searchItem(int pid) throws Exception {
+    String searchStm = "select * from products where pid = ?";
     st = connection.prepareStatement(searchStm);
-    st.setString(1, pid);
+    st.setInt(1, pid);
     resultSet = st.executeQuery();
     if (resultSet.next()) {
       return pid;
     } else {
-      return "No Such Item in DB";
+      return -1;
     }
   }
-
-  public void deleleItem(String pid) throws Exception {
-    String deleteStm = "delete from product where pid = ?";
+  protected int getDBRowSize() throws Exception {
+    int row;
+    String countStm = "select count(*) from products";
+    st = connection.prepareStatement(countStm);
+    resultSet = st.executeQuery(countStm);
+    resultSet.next();
+    row = resultSet.getInt(1);
+    return row;
+  }
+  protected void deleteItem(int pid) throws Exception {
+    String deleteStm = "delete from products where pid = ?";
     st = connection.prepareStatement(deleteStm);
-    st.setString(1, pid);
-    if (st.executeUpdate() == 1) {
-      displayDB(pid);
-    } else {
-      System.out.println("No Such item in database");
-    }
+    st.setInt(1, pid);
+    st.executeUpdate();
   }
 }
