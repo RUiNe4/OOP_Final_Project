@@ -6,6 +6,5 @@ public class DBConnection {
     Connection connection = DriverManager.getConnection(url, user, password);
     return connection;
   }
-
 }
   

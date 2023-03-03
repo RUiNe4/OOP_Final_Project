@@ -46,13 +46,12 @@ public class QueryFunction extends DBConnection {
 //      System.out.println("Product Type: " + resultSet.getString("pType"));
 //    }
 //  }
-  protected void addQuery(String pName, double pPrice, int pQty, String imgSrc) throws Exception {
-    String insertStm = "insert into products (pName, pPrice, pQty, productImg) values (?, ?, ?, ?)";
+  protected void addQuery(String pName, double pPrice, int pQty) throws Exception {
+    String insertStm = "insert into products (pName, pPrice, pQty) values (?, ?, ?)";
     st = connection.prepareStatement(insertStm);
     st.setString(1, pName);
     st.setDouble(2, pPrice);
     st.setInt(3, pQty);
-    st.setString(4, imgSrc);
     st.executeUpdate();
   }
   public void updateQuery(int id, String name) throws Exception {

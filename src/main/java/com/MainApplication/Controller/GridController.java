@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 
 public class GridController {
+  SceneController sceneController = new SceneController();
   @FXML
   private ImageView productImg;
   @FXML
@@ -36,23 +37,24 @@ public class GridController {
   private TextField prodPriceTF;
   @FXML
   private Button editBtn;
+
   //  @FXML
 //  private TextField prodTypeTF;
   @FXML
   private Label productPrice;
   private Product product;
 
-  public void uploadImage() throws MalformedURLException {
-    Stage primaryStage = new Stage();
-    final FileChooser f = new FileChooser();
-    productImg = new ImageView();
-    File file = f.showOpenDialog(primaryStage);
-    if (file != null) { // only proceed, if file was chosen
-      Image img = new Image(file.toURI().toURL().toExternalForm());
-      System.out.println(file.toURI().toURL().toExternalForm());
-      productImg.setImage(img);
-    }
-  }
+//  public void uploadImage() throws MalformedURLException {
+//    Stage primaryStage = new Stage();
+//    final FileChooser f = new FileChooser();
+//    productImg = new ImageView();
+//    File file = f.showOpenDialog(primaryStage);
+//    if (file != null) { // only proceed, if file was chosen
+//      Image img = new Image(file.toURI().toURL().toExternalForm());
+//      System.out.println(file.toURI().toURL().toExternalForm());
+//      productImg.setImage(img);
+//    }
+//  }
 
   public void setData(Product product) throws Exception {
     this.product = product;
@@ -62,13 +64,19 @@ public class GridController {
 
   public void deleteButton(ActionEvent event) throws Exception {
     product.deleteProduct(product.getPid());
-
+    sceneController.switchSceneButton(event, "product-view.fxml");
     System.out.println("Product ID :::: " + product.getPid() + " is Deleted");
   }
 
+  public void backButton(ActionEvent event) throws IOException {
+    sceneController.switchSceneButton(event, "product-view.fxml");
+  }
   public void addButton(ActionEvent event) throws Exception {
     product = new Product();
-    product.addProduct(prodNameTF.getText(), (Double.parseDouble(prodPriceTF.getText())), Integer.parseInt(prodQtyTF.getText()), productImg.getImage().getUrl());
+
+    product.addProduct(prodNameTF.getText(), (Double.parseDouble(prodPriceTF.getText())), Integer.parseInt(prodQtyTF.getText()));
+    sceneController.switchSceneButton(event, "product-view.fxml");
+
     product.displayProduct();
   }
 

@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class Product extends QueryFunction {
-  private String imgSrc;
+//  private String imgSrc;
   private int pid;
   private String pName;
   private Double pPrice;
@@ -25,13 +25,13 @@ public class Product extends QueryFunction {
 
   //getter
 
-  public void setImgSrc(String imgSrc) {
-    this.imgSrc = imgSrc;
-  }
-
-  public String getImgSrc() {
-    return imgSrc;
-  }
+//  public void setImgSrc(String imgSrc) {
+//    this.imgSrc = imgSrc;
+//  }
+//
+//  public String getImgSrc() {
+//    return imgSrc;
+//  }
 
   public String getpName() {
     return pName;
@@ -84,7 +84,7 @@ public class Product extends QueryFunction {
       product.setpPrice(resultSet.getDouble("pPrice"));
       product.setpQty(resultSet.getInt("pQty"));
 //      product.setpType(resultSet.getString("pType"));
-      product.setImgSrc(resultSet.getString("productImg"));
+//      product.setImgSrc(resultSet.getString("productImg"));
 
       products.add(product);
     }
@@ -127,20 +127,20 @@ public class Product extends QueryFunction {
       System.out.println("There's no product with that ID");
   }
 
-  Product setProduct(String pName, double pPrice, int pQty, String productImg) throws Exception {
+  Product setProduct(String pName, double pPrice, int pQty) throws Exception {
     product.setpName(pName);
     product.setpPrice(pPrice);
     product.setpQty(pQty);
 //    product.setpType(pType);
-    product.setImgSrc(productImg);
+//    product.setImgSrc(productImg);
 
     return product;
   }
 
-  public void addProduct(String pName, double pPrice, int pQty, String productImg) throws Exception {
+  public void addProduct(String pName, double pPrice, int pQty) throws Exception {
     product = new Product();
-    product = setProduct(pName, pPrice, pQty, productImg);
-    product.addQuery(pName, pPrice, pQty, productImg);
+    product = setProduct(pName, pPrice, pQty);
+    product.addQuery(pName, pPrice, pQty);
     products.add(product);
   }
 

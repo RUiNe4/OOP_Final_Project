@@ -18,7 +18,7 @@
                <children>
                   <ImageView fx:id="productImg" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="file:/D:/OOP_Final_Project/src/main/resources/images/wallpaperflare.com_wallpaper.jpg" />
+                        <Image url="@images/wallpaperflare.com_wallpaper.jpg" />
                      </image>
                   </ImageView>
                </children>

@@ -13,9 +13,9 @@ public class Main extends Application {
   @Override
   public void start(Stage stage) throws IOException {
     FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("product-view.fxml"));
-    Scene scene = new Scene(fxmlLoader.load());
+    Scene scene = new Scene(fxmlLoader.load(), 1366, 768);
     scene.getStylesheets().add(getClass().getResource("Style/styles.css").toExternalForm());
-    stage.setTitle("Hello!");
+    stage.setTitle("POS System - Group 7");
     stage.setScene(scene);
     stage.show();
   }
@@ -25,7 +25,7 @@ public class Main extends Application {
     ArrayList<Product> products;
     products = product.readFromDB();
 
-//    product.displayDB();
+    product.displayDB();
 
 //    product.updateProduct(1062, "edit");
 

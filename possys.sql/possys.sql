@@ -20,7 +20,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `possys`
 --
-CREATE DATABASE IF NOT EXISTS `possys` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+CREATE DATABASE IF NOT EXISTS `possys` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `possys`;
 
 -- --------------------------------------------------------
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   `pQty` int DEFAULT '0',
   `productImg` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`pid`)
-) ENGINE=MyISAM AUTO_INCREMENT=1063 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=1063 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `products`

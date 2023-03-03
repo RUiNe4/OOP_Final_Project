@@ -17,7 +17,7 @@
          <children>
             <ImageView fitHeight="416.0" fitWidth="837.0" layoutX="-284.0" layoutY="-8.0" pickOnBounds="true" smooth="false">
                <image>
-                  <Image url="@../../../images/wallpaperflare.com_wallpaper.jpg" />
+                  <Image url="@images/wallpaperflare.com_wallpaper.jpg" />
                </image>
                <viewport>
                   <Rectangle2D />

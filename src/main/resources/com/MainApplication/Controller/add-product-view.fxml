@@ -16,7 +16,7 @@
          <children>
             <ImageView fitHeight="481.0" fitWidth="329.0" pickOnBounds="true" smooth="false">
                <image>
-                  <Image url="@../../../images/photo_2022-04-02_20-48-52.jpg" />
+                  <Image url="@images/photo_2022-04-02_20-48-52.jpg" />
                </image>
                <viewport>
                   <Rectangle2D />
@@ -35,7 +35,7 @@
                </font>
             </Label>
             <Button id="addBtn" layoutX="172.0" layoutY="271.0" mnemonicParsing="false" onAction="#addButton" prefHeight="36.0" prefWidth="86.0" text="ADD" />
-            <Button id="addBtn" layoutX="21.0" layoutY="235.0" mnemonicParsing="false" onAction="#uploadImage" prefHeight="36.0" prefWidth="99.0" text="upload img" />
+            <Button id="addBtn" layoutX="55.0" layoutY="271.0" mnemonicParsing="false" onAction="#backButton" prefHeight="36.0" prefWidth="86.0" text="Back" />
          </children>
       </Pane>
    </children>

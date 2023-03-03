@@ -33,6 +33,7 @@ import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 
 public class ProductController extends GridController implements Initializable {
+  SceneController sceneController = new SceneController();
   @FXML
   private GridPane grid;
   Product product = new Product();
@@ -48,38 +49,43 @@ public class ProductController extends GridController implements Initializable {
     button.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent event) {
-        Stage addStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        double x = addStage.getX();
-        double y = addStage.getY();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("add-product-view.fxml"));
-        Parent root;
+//        Stage addStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//        double x = addStage.getX();
+//        double y = addStage.getY();
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("add-product-view.fxml"));
+//        Parent root;
+//
+//        try {
+//          root = loader.load();
+//        } catch (IOException e) {
+//          throw new RuntimeException(e);
+//        }
+//        ScaleTransition st = new ScaleTransition(Duration.millis(50), root);
+//        st.setInterpolator(Interpolator.EASE_BOTH);
+//        st.setFromX(0);
+//        st.setFromY(0);
+//        st.setToX(1);
+//        st.setToY(1);
+//
+//        Stage stage = new Stage();
+//        stage.setTitle("Add");
+//        Scene scene = new Scene(root);
+//
+//        stage.setScene(scene);
+//        stage.setResizable(false);
+//        stage.show();
+//        stage.setY(y);
+//        stage.setX(x);
         try {
-          root = loader.load();
+          sceneController.switchSceneButton(event, "add-product-view.fxml");
         } catch (IOException e) {
           throw new RuntimeException(e);
         }
-        ScaleTransition st = new ScaleTransition(Duration.millis(50), root);
-        st.setInterpolator(Interpolator.EASE_BOTH);
-        st.setFromX(0);
-        st.setFromY(0);
-        st.setToX(1);
-        st.setToY(1);
-
-        Stage stage = new Stage();
-        stage.setTitle("Add");
-        Scene scene = new Scene(root);
-
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
-        stage.setY(y);
-        stage.setX(x);
       }
     });
     return button;
   }
   public void updateGrid(ArrayList<Product> products) throws Exception {
-
     int column = 0;
     int row = 1;
     for (int i = 0; i < products.size(); i++) {
