@@ -21,11 +21,11 @@ public class Main extends Application {
   }
 
   public static void main(String[] args) throws Exception {
-    Product product = new Product();
-    ArrayList<Product> products;
-    products = product.readFromDB();
-
-    product.displayDB();
+//    Product product = new Product();
+//    ArrayList<Product> products;
+//    products = product.readFromDB();
+//
+//    product.displayDB();
 
 //    product.updateProduct(1062, "edit");
 

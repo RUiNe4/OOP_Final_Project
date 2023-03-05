@@ -72,9 +72,9 @@ public class GridController {
     sceneController.switchSceneButton(event, "product-view.fxml");
   }
   public void addButton(ActionEvent event) throws Exception {
-    product = new Product();
+//    product = new Product();
 
-    product.addProduct(prodNameTF.getText(), (Double.parseDouble(prodPriceTF.getText())), Integer.parseInt(prodQtyTF.getText()));
+//    product.addProduct(prodNameTF.getText(), (Double.parseDouble(prodPriceTF.getText())), Integer.parseInt(prodQtyTF.getText()));
     sceneController.switchSceneButton(event, "product-view.fxml");
 
     product.displayProduct();

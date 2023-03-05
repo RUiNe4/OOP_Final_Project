@@ -88,6 +88,7 @@ public class ProductController extends GridController implements Initializable {
   public void updateGrid(ArrayList<Product> products) throws Exception {
     int column = 0;
     int row = 1;
+    System.out.println(products.size());
     for (int i = 0; i < products.size(); i++) {
       FXMLLoader fxmlLoader = new FXMLLoader(ProductController.class.getResource("grid-view.fxml"));
       AnchorPane anchorPane = fxmlLoader.load();

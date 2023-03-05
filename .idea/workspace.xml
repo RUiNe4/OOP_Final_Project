@@ -6,19 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="bf7a8ab0-e9b7-4e5e-881c-17b58dac5dc5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/possys.sql/possys.sql" beforeDir="false" afterPath="$PROJECT_DIR$/possys.sql/possys.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/DatabaseFunction/DBConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/DatabaseFunction/DBConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/DatabaseFunction/QueryFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/DatabaseFunction/QueryFunction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/GridController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/GridController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/MyListener.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ProductManagement/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ProductManagement/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/add-product-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/add-product-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/edit-product-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/edit-product-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/grid-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/grid-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/photo_2022-04-02_20-48-52.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/images/photo_2022-04-02_20-48-52.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/wallpaperflare.com_wallpaper.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/images/wallpaperflare.com_wallpaper.jpg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,6 +166,7 @@
       <workItem from="1677720991601" duration="2634000" />
       <workItem from="1677724241351" duration="3946000" />
       <workItem from="1677728863461" duration="132000" />
+      <workItem from="1677846887570" duration="1229000" />
     </task>
     <servers />
   </component>
