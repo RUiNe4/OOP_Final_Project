@@ -1,5 +1,6 @@
 package com.MainApplication.Controller;
 
+import com.ProductManagement.Cart;
 import com.ProductManagement.Product;
 import javafx.animation.Interpolator;
 import javafx.animation.ScaleTransition;
@@ -29,68 +30,34 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 
+import javafx.scene.control.Label;
+
+
 public class ProductController extends GridController implements Initializable {
-  SceneController sceneController = new SceneController();
+  private static Cart cart;
   @FXML
-  private GridPane grid;
-  Product product = new Product();
-  private Button button;
+  private GridPane verticalGrid;
+  private final Product product = new Product();
+  @FXML
+  private GridPane horizonGrid;
+  @FXML
+  private Label cartStatus;
+  private SceneController sceneController = new SceneController();
 
   public ProductController() throws Exception {
   }
-  public Button addButton() {
-    button = new Button("ADD");
-    button.setId("addButton");
-    button.setPrefWidth(110);
-    button.setPrefHeight(110);
-    button.setOnAction(new EventHandler<ActionEvent>() {
-      @Override
-      public void handle(ActionEvent event) {
-//        Stage addStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//        double x = addStage.getX();
-//        double y = addStage.getY();
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("add-product-view.fxml"));
-//        Parent root;
-//
-//        try {
-//          root = loader.load();
-//        } catch (IOException e) {
-//          throw new RuntimeException(e);
-//        }
-//        ScaleTransition st = new ScaleTransition(Duration.millis(50), root);
-//        st.setInterpolator(Interpolator.EASE_BOTH);
-//        st.setFromX(0);
-//        st.setFromY(0);
-//        st.setToX(1);
-//        st.setToY(1);
-//
-//        Stage stage = new Stage();
-//        stage.setTitle("Add");
-//        Scene scene = new Scene(root);
-//
-//        stage.setScene(scene);
-//        stage.setResizable(false);
-//        stage.show();
-//        stage.setY(y);
-//        stage.setX(x);
-        try {
-          sceneController.switchSceneButton(event, "add-product-view.fxml");
-        } catch (IOException e) {
-          throw new RuntimeException(e);
-        }
-      }
-    });
-    return button;
-  }
-  public void updateGrid(ArrayList<Product> products) throws Exception {
+
+  private void itemDisplay() throws Exception {
+    ArrayList<Product> products = product.readFromDB();
     int column = 0;
     int row = 1;
     System.out.println(products.size());
     for (int i = 0; i < products.size(); i++) {
-      FXMLLoader fxmlLoader = new FXMLLoader(ProductController.class.getResource("grid-view.fxml"));
+      FXMLLoader fxmlLoader = new FXMLLoader(ProductController.class.getResource("item-view.fxml"));
       AnchorPane anchorPane = fxmlLoader.load();
       GridController gridController = fxmlLoader.getController();
       gridController.setData(products.get(i));
@@ -98,28 +65,68 @@ public class ProductController extends GridController implements Initializable {
         column = 0;
         row++;
       }
-      grid.setMinWidth(Region.USE_COMPUTED_SIZE);
-      grid.setPrefWidth(Region.USE_COMPUTED_SIZE);
-      grid.setMaxWidth(Region.USE_COMPUTED_SIZE);
+      verticalGrid.setMinWidth(Region.USE_COMPUTED_SIZE);
+      verticalGrid.setPrefWidth(Region.USE_COMPUTED_SIZE);
+      verticalGrid.setMaxWidth(Region.USE_COMPUTED_SIZE);
 
-      grid.setMinHeight(Region.USE_COMPUTED_SIZE);
-      grid.setPrefHeight(Region.USE_COMPUTED_SIZE);
-      grid.setMaxHeight(Region.USE_COMPUTED_SIZE);
+      verticalGrid.setMinHeight(Region.USE_COMPUTED_SIZE);
+      verticalGrid.setPrefHeight(Region.USE_COMPUTED_SIZE);
+      verticalGrid.setMaxHeight(Region.USE_COMPUTED_SIZE);
 
-      grid.add(anchorPane, column++, row);
+      verticalGrid.add(anchorPane, column++, row);
       GridPane.setMargin(anchorPane, new Insets(10));
     }
-    grid.add(addButton(), column++, row);
+  }
+
+  private final static ArrayList<Cart> carts = new ArrayList<>();
+
+  protected static ArrayList<Cart> getAllProducts(Cart product) {
+    cart = product;
+    carts.add(cart);
+    return carts;
+  }
+
+  public void cartItem() throws Exception {
+    int column = 1;
+    if (carts.isEmpty()) {
+      cartStatus.setText("Empty Cart");
+    } else {
+      cartStatus.setText("My Cart");
+      for (int i = 0; i < carts.size(); i++) {
+        FXMLLoader fxmlLoader = new FXMLLoader(ProductController.class.getResource("added-item-list.fxml"));
+        AnchorPane anchorPane = fxmlLoader.load();
+        CartController cartController = fxmlLoader.getController();
+        cartController.setCart(carts.get(i));
+
+        horizonGrid.setMinWidth(Region.USE_COMPUTED_SIZE);
+        horizonGrid.setPrefWidth(Region.USE_COMPUTED_SIZE);
+        horizonGrid.setMaxWidth(Region.USE_COMPUTED_SIZE);
+
+        horizonGrid.setMinHeight(Region.USE_COMPUTED_SIZE);
+        horizonGrid.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        horizonGrid.setMaxHeight(Region.USE_COMPUTED_SIZE);
+
+        horizonGrid.add(anchorPane, column, i);
+      }
+    }
+  }
+
+  public void clearCart(ActionEvent event) throws IOException {
+    carts.removeAll(carts);
+    sceneController.switchSceneButton(event, "product-view.fxml");
+  }
+
+  public void confirmItem(ActionEvent event) {
+
   }
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     try {
-      ArrayList<Product> products;
-      products = product.readFromDB();
-      updateGrid(products);
+      itemDisplay();
+      cartItem();
     } catch (Exception e) {
-      throw new RuntimeException(e);
+      System.out.println(e.getMessage());
     }
   }
 }

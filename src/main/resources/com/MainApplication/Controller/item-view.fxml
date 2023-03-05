@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="gridBox" prefHeight="120.0" prefWidth="120.0" stylesheets="@Style/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.MainApplication.Controller.GridController">
+<AnchorPane id="gridBox" prefHeight="100.0" prefWidth="100.0" stylesheets="@Style/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.MainApplication.Controller.GridController">
    <children>
       <VBox alignment="TOP_CENTER" layoutX="3.0" layoutY="4.0" prefHeight="200.0" prefWidth="210.0">
          <children>
@@ -27,18 +27,22 @@
                <children>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Label fx:id="productName" layoutX="14.0" layoutY="1.0" prefHeight="35.0" prefWidth="109.0" text="Product name">
+                        <Label fx:id="productName" layoutX="7.0" layoutY="3.0" prefHeight="35.0" prefWidth="109.0" text="Product name">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="productPrice" layoutX="133.0" layoutY="6.0" text="\$99.99">
+                        <Label fx:id="productPrice" layoutX="14.0" layoutY="45.0" text="\$99.99" textFill="RED">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Button id="deleteBtn" layoutX="135.0" layoutY="46.0" mnemonicParsing="false" onAction="#deleteButton" stylesheets="@Style/styles.css" text="Delete" />
-                        <Button id="editBtn" fx:id="editBtn" layoutX="71.0" layoutY="46.0" mnemonicParsing="false" onAction="#editMenu" prefHeight="25.0" prefWidth="53.0" stylesheets="@Style/styles.css" text="Edit" />
+                        <Button id="addBtn" layoutX="130.0" layoutY="45.0" mnemonicParsing="false" onAction="#addCart" prefHeight="25.0" prefWidth="53.0" stylesheets="@Style/styles.css" text="Add" />
+                        <Label fx:id="productQty" layoutX="149.0" layoutY="8.0" prefHeight="25.0" prefWidth="34.0" text="0000">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                </children>

@@ -1,0 +1,79 @@
+package com.DatabaseFunction;
+
+import com.ProductManagement.Cart;
+
+import java.sql.*;
+
+public class QueryCart {
+  private DBConnection con = new DBConnection();
+  private final Statement statement;
+  private final Connection connection;
+  private PreparedStatement st;
+  private ResultSet resultSet;
+
+  public QueryCart(String url, String user, String password) throws Exception {
+    this.connection = con.getConnection(url, user, password);
+    this.statement = connection.createStatement();
+  }
+
+  protected void displayCart(int cartID) throws Exception {
+    ResultSet resultSet;
+    String searchStm = "select * from cartproducts where cartid = ?";
+    st = connection.prepareStatement(searchStm);
+    st.setInt(1, cartID);
+    resultSet = st.executeQuery();
+    while (resultSet.next()) {
+      if (resultSet.getInt(cartID) == cartID) {
+        System.out.println(resultSet.getInt("cartID"));
+        System.out.println(resultSet.getString("productName"));
+        System.out.println(resultSet.getFloat("productPrice"));
+        System.out.println(resultSet.getInt("productQty"));
+      }
+    }
+  }
+
+  protected void addCartQuery(int productID, String productName, double productPrice, int productQty) throws Exception {
+    String insertStm = "insert into cartProducts (productID, productName, productPrice, productQty) values (?, ?, ?, ?)";
+    st = connection.prepareStatement(insertStm);
+    st.setInt(1, productID);
+    st.setString(2, productName);
+    st.setDouble(3, productPrice);
+    st.setInt(4, productQty);
+    st.executeUpdate();
+  }
+
+  protected Cart searchFromProduct(int pid) throws Exception {
+    String searchStm = "select * from products where pid = ?";
+    st = connection.prepareStatement(searchStm);
+    st.setInt(1, pid);
+    resultSet = st.executeQuery();
+    if (resultSet.next()) {
+      Cart item = new Cart();
+      item.setCartID(resultSet.getInt("pid") + 1000);
+      item.setProductName(resultSet.getString("pName"));
+      item.setProductPrice(resultSet.getFloat("pPrice"));
+      item.setProductQty(resultSet.getInt("pQty"));
+      return item;
+    } else {
+      return null;
+    }
+  }
+
+  protected void deleteFromCart(int cartID) throws Exception {
+    String deleteStm = "delete from cartproducts where cartID = ?";
+    st = connection.prepareStatement(deleteStm);
+    st.setInt(1, cartID);
+    st.executeUpdate();
+  }
+  protected void updateCartProduct(String productName, int productQty) throws SQLException {
+    try{
+      String updateStm = "update from cartproducts set productQty = ? where productName = ?";
+      st = connection.prepareStatement(updateStm);
+      st.setInt(1, productQty+1);
+      st.setString(2, productName);
+      st.executeUpdate();
+    } catch (Exception e){
+      System.out.println(e.getMessage());
+    }
+  }
+}

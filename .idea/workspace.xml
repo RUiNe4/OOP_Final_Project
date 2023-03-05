@@ -6,9 +6,23 @@
   <component name="ChangeListManager">
     <list default="true" id="bf7a8ab0-e9b7-4e5e-881c-17b58dac5dc5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/DatabaseFunction/QueryFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/DatabaseFunction/QueryProduct.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/EmployeeController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/GridController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/GridController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/LandingController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/SceneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/SceneController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ProductManagement/GeneralFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ProductManagement/GeneralFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ProductManagement/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ProductManagement/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/Style/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/Style/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/add-product-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/new-product-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/edit-product-view.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/employee-view.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/grid-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/item-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/landing-view.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/product-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/product-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,8 +38,8 @@
         <option value="Kotlin Class" />
         <option value="CSS File" />
         <option value="Interface" />
-        <option value="Class" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -86,7 +100,7 @@
       <module name="demo" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.MainApplication.Controller.*" />
+          <option name="PATTERN" value="com.ProductManagement.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -99,7 +113,7 @@
       <module name="demo" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.MainApplication.Controller.*" />
+          <option name="PATTERN" value="com.ProductManagement.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -125,7 +139,7 @@
       <module name="demo" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.MainApplication.Controller.*" />
+          <option name="PATTERN" value="com.ProductManagement.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -166,11 +180,31 @@
       <workItem from="1677720991601" duration="2634000" />
       <workItem from="1677724241351" duration="3946000" />
       <workItem from="1677728863461" duration="132000" />
-      <workItem from="1677846887570" duration="1229000" />
+      <workItem from="1677822374810" duration="1698000" />
+      <workItem from="1677825880867" duration="998000" />
+      <workItem from="1677830554048" duration="18917000" />
+      <workItem from="1677864249864" duration="3287000" />
+      <workItem from="1677903150380" duration="2308000" />
+      <workItem from="1677915202763" duration="13412000" />
+      <workItem from="1677935714430" duration="1342000" />
+      <workItem from="1677941314924" duration="4648000" />
+      <workItem from="1677983737365" duration="918000" />
+      <workItem from="1678030587682" duration="4357000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
