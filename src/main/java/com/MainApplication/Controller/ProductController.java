@@ -55,6 +55,7 @@ public class ProductController extends GridController implements Initializable {
     ArrayList<Product> products = product.readFromDB();
     int column = 0;
     int row = 1;
+    System.out.println(products.size());
     for (int i = 0; i < products.size(); i++) {
       FXMLLoader fxmlLoader = new FXMLLoader(ProductController.class.getResource("item-view.fxml"));
       AnchorPane anchorPane = null;
