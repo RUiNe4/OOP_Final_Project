@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 
+import java.io.IOException;
+
 public class CartController {
   private SceneController sceneController = new SceneController();
   @FXML
@@ -28,9 +30,13 @@ public class CartController {
 
   public CartController() throws Exception {
   }
-  public void deleteButton(ActionEvent event) throws Exception {
-    sceneController.switchSceneButton(event, "product-view.fxml");
-    System.out.println("Product ID ::::  is Deleted");
+  public void deleteButton(ActionEvent event) {
+    try {
+      sceneController.switchSceneButton(event, "product-view.fxml");
+      System.out.println("Product ID ::::  is Deleted");
+    } catch (IOException e) {
+      System.out.println(e.getMessage());
+    }
   }
   public void increase(MouseEvent event){
     System.out.println("Increase");
@@ -38,7 +44,7 @@ public class CartController {
   public void decrease(MouseEvent event){
     System.out.println("Decrease");
   }
-  public void setCart(Cart cart) throws Exception {
+  public void setCart(Cart cart) {
     this.cart = cart;
     productName.setText(cart.getProductName());
     productPrice.setText(String.valueOf(cart.getProductPrice()));
