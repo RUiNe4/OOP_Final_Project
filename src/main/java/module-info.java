@@ -5,4 +5,6 @@ module com.MainApplication {
 
   exports com.MainApplication.Controller;
   opens com.MainApplication.Controller to javafx.fxml;
+  exports com.ProductManagement;
+  opens com.ProductManagement to javafx.fxml;
 }

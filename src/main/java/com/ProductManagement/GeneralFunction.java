@@ -26,4 +26,5 @@ public class GeneralFunction {
     input = sc.nextLine();
     return input;
   }
+
 }

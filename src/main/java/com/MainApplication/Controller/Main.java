@@ -1,6 +1,6 @@
 package com.MainApplication.Controller;
 
-import com.ProductManagement.Product;
+import com.ProductManagement.Cart;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,18 +17,19 @@ public class Main extends Application {
     scene.getStylesheets().add(getClass().getResource("Style/styles.css").toExternalForm());
     stage.setTitle("POS System - Group 7");
     stage.setScene(scene);
+    stage.setResizable(false);
     stage.show();
   }
 
   public static void main(String[] args) throws Exception {
-    Product product = new Product();
-    ArrayList<Product> products;
-    products = product.readFromDB();
+//    Cart cart = new Cart();
+//    cart.readCartDB();
+//    cart.displayCartProducts();
 
-    product.displayDB();
 
-//    product.updateProduct(1062, "edit");
+//    cart.updateCartItem(cart.getProductName(), cart.getProductQty());
 
+//    cart.displayCartProducts();
     launch();
   }
 }
