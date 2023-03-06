@@ -2,40 +2,21 @@ package com.MainApplication.Controller;
 
 import com.ProductManagement.Cart;
 import com.ProductManagement.Product;
-import javafx.animation.Interpolator;
-import javafx.animation.ScaleTransition;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
-import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.io.IOException;
-import java.net.PortUnreachableException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.ResourceBundle;
-import java.util.concurrent.atomic.AtomicReferenceArray;
 
 import javafx.scene.control.Label;
-
 
 public class ProductController extends GridController implements Initializable {
   private static Cart cart;
@@ -55,7 +36,6 @@ public class ProductController extends GridController implements Initializable {
     ArrayList<Product> products = product.readFromDB();
     int column = 0;
     int row = 1;
-    System.out.println(products.size());
     for (int i = 0; i < products.size(); i++) {
       FXMLLoader fxmlLoader = new FXMLLoader(ProductController.class.getResource("item-view.fxml"));
       AnchorPane anchorPane = null;
@@ -85,10 +65,20 @@ public class ProductController extends GridController implements Initializable {
 
   private final static ArrayList<Cart> carts = new ArrayList<>();
 
-  protected static ArrayList<Cart> getAllProducts(Cart product) {
+  protected static ArrayList<Cart> setCartProduct(Cart product) {
     cart = product;
     carts.add(cart);
     return carts;
+  }
+
+  public ArrayList<Cart> getCartProduct() throws Exception {
+    ArrayList<Cart> items;
+    if (cart == null) {
+      return null;
+    } else {
+      items = setCartProduct(cart);
+      return items;
+    }
   }
 
   public void cartItem() {
@@ -97,12 +87,13 @@ public class ProductController extends GridController implements Initializable {
       cartStatus.setText("Empty Cart");
     } else {
       cartStatus.setText("My Cart");
+
       for (int i = 0; i < carts.size(); i++) {
         try {
           FXMLLoader fxmlLoader = new FXMLLoader(ProductController.class.getResource("added-item-list.fxml"));
-          AnchorPane anchorPane = null;
-          anchorPane = fxmlLoader.load();
+          AnchorPane anchorPane = fxmlLoader.load();
           CartController cartController = fxmlLoader.getController();
+
           cartController.setCart(carts.get(i));
 
           horizonGrid.setMinWidth(Region.USE_COMPUTED_SIZE);

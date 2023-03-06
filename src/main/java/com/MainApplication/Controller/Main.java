@@ -1,6 +1,7 @@
 package com.MainApplication.Controller;
 
 import com.ProductManagement.Cart;
+import com.ProductManagement.Product;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -22,14 +23,6 @@ public class Main extends Application {
   }
 
   public static void main(String[] args) throws Exception {
-//    Cart cart = new Cart();
-//    cart.readCartDB();
-//    cart.displayCartProducts();
-
-
-//    cart.updateCartItem(cart.getProductName(), cart.getProductQty());
-
-//    cart.displayCartProducts();
     launch();
   }
 }
