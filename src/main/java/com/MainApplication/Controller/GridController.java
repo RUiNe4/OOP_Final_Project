@@ -32,16 +32,21 @@ public class GridController {
   private Product product;
 
   public GridController() throws Exception {
+
   }
 
-  public void setData(Product product) throws Exception {
-    this.product = product;
-    productName.setText(product.getpName());
-    productPrice.setText(String.valueOf(product.getpPrice()));
-    productQty.setText(String.valueOf(product.getpQty()));
+  public void setData(Product product) {
+    try{
+      this.product = product;
+      productName.setText(product.getpName());
+      productPrice.setText(String.valueOf(product.getpPrice()));
+      productQty.setText(String.valueOf(product.getpQty()));
+    } catch (Exception e){
+      System.out.println(e.getMessage());
+    }
   }
 
-  public void addCart(ActionEvent event) throws Exception {
+  public void addCart(ActionEvent event) {
     try {
       cartProduct = new Cart();
       cartProduct = cartProduct.searchProduct(product.getPid());

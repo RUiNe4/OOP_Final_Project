@@ -17,8 +17,12 @@ public class Product extends QueryProduct {
 
   public Product() throws Exception {
     super("jdbc:mysql://localhost:3306/possys", "root", "");
-    Connection connection = con.getConnection("jdbc:mysql://localhost:3306/possys", "root", "");
-    this.statement = connection.createStatement();
+    try{
+      Connection connection = con.getConnection("jdbc:mysql://localhost:3306/possys", "root", "");
+      this.statement = connection.createStatement();
+    } catch (Exception e){
+      System.out.println(e.getMessage());
+    }
   }
 
   //getter
@@ -56,15 +60,19 @@ public class Product extends QueryProduct {
     this.pQty = pQty;
   }
 
-  public ArrayList<Product> readFromDB() throws Exception {
-    ResultSet resultSet = statement.executeQuery("select * from products");
-    while (resultSet.next()) {
-      product = new Product();
-      product.setPid(resultSet.getInt("pId"));
-      product.setpName(resultSet.getString("pName"));
-      product.setpPrice(resultSet.getDouble("pPrice"));
-      product.setpQty(resultSet.getInt("pQty"));
-      products.add(product);
+  public ArrayList<Product> readFromDB() {
+    try{
+      ResultSet resultSet = statement.executeQuery("select * from products");
+      while (resultSet.next()) {
+        product = new Product();
+        product.setPid(resultSet.getInt("pId"));
+        product.setpName(resultSet.getString("pName"));
+        product.setpPrice(resultSet.getDouble("pPrice"));
+        product.setpQty(resultSet.getInt("pQty"));
+        products.add(product);
+      }
+    } catch (Exception e){
+      System.out.println(e.getMessage());
     }
     return products;
   }
@@ -76,7 +84,7 @@ public class Product extends QueryProduct {
     System.out.println("Product Quantity: " + pQty);
   }
 
-  public void displayProducts() throws Exception {
+  public void displayProducts() {
     for (int i = 0; i < products.size(); i++) {
       System.out.println("Product name: " + products.get(i).pName);
       System.out.println("Product Price: " + products.get(i).pPrice);
@@ -85,29 +93,44 @@ public class Product extends QueryProduct {
     }
   }
 
-  public void setProduct(String pName, double pPrice, int pQty) throws Exception {
-//    Product product = new Product();
+  public void setProduct(String pName, double pPrice, int pQty) {
     setpName(pName);
     setpPrice(pPrice);
     setpQty(pQty);
-//    return product;
   }
 
-  public void addProduct(String pName, double pPrice, int pQty) throws Exception {
+  public void addProduct(String pName, double pPrice, int pQty) {
     setProduct(pName, pPrice, pQty);
-    addQuery(pName, pPrice, pQty);
+    try {
+      addQuery(pName, pPrice, pQty);
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
     products.add(product);
   }
 
-  public void deleteProduct(int pid) throws Exception {
-    deleteItem(pid);
+  public void deleteProduct(int pid) {
+    try {
+      deleteItem(pid);
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
   }
 
-  public void updateProduct(int pid, String pName) throws Exception {
-    updateQuery(pid, pName);
+  public void updateProduct(int pid, String pName) {
+    try {
+      updateQuery(pid, pName);
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
   }
 
-  public Product searchProduct(int pid) throws Exception {
-    return searchItem(pid);
+  public Product searchProduct(int pid) {
+    try {
+      return searchItem(pid);
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+    return null;
   }
 }

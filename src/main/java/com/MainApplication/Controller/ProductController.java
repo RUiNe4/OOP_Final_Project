@@ -51,14 +51,19 @@ public class ProductController extends GridController implements Initializable {
   public ProductController() throws Exception {
   }
 
-  private void itemDisplay() throws Exception {
+  private void itemDisplay() {
     ArrayList<Product> products = product.readFromDB();
     int column = 0;
     int row = 1;
     System.out.println(products.size());
     for (int i = 0; i < products.size(); i++) {
       FXMLLoader fxmlLoader = new FXMLLoader(ProductController.class.getResource("item-view.fxml"));
-      AnchorPane anchorPane = fxmlLoader.load();
+      AnchorPane anchorPane = null;
+      try {
+        anchorPane = fxmlLoader.load();
+      } catch (IOException e) {
+        System.out.println(e.getMessage());
+      }
       GridController gridController = fxmlLoader.getController();
       gridController.setData(products.get(i));
       if (column == 3) {
@@ -86,34 +91,43 @@ public class ProductController extends GridController implements Initializable {
     return carts;
   }
 
-  public void cartItem() throws Exception {
+  public void cartItem() {
     int column = 1;
     if (carts.isEmpty()) {
       cartStatus.setText("Empty Cart");
     } else {
       cartStatus.setText("My Cart");
       for (int i = 0; i < carts.size(); i++) {
-        FXMLLoader fxmlLoader = new FXMLLoader(ProductController.class.getResource("added-item-list.fxml"));
-        AnchorPane anchorPane = fxmlLoader.load();
-        CartController cartController = fxmlLoader.getController();
-        cartController.setCart(carts.get(i));
+        try {
+          FXMLLoader fxmlLoader = new FXMLLoader(ProductController.class.getResource("added-item-list.fxml"));
+          AnchorPane anchorPane = null;
+          anchorPane = fxmlLoader.load();
+          CartController cartController = fxmlLoader.getController();
+          cartController.setCart(carts.get(i));
 
-        horizonGrid.setMinWidth(Region.USE_COMPUTED_SIZE);
-        horizonGrid.setPrefWidth(Region.USE_COMPUTED_SIZE);
-        horizonGrid.setMaxWidth(Region.USE_COMPUTED_SIZE);
+          horizonGrid.setMinWidth(Region.USE_COMPUTED_SIZE);
+          horizonGrid.setPrefWidth(Region.USE_COMPUTED_SIZE);
+          horizonGrid.setMaxWidth(Region.USE_COMPUTED_SIZE);
 
-        horizonGrid.setMinHeight(Region.USE_COMPUTED_SIZE);
-        horizonGrid.setPrefHeight(Region.USE_COMPUTED_SIZE);
-        horizonGrid.setMaxHeight(Region.USE_COMPUTED_SIZE);
+          horizonGrid.setMinHeight(Region.USE_COMPUTED_SIZE);
+          horizonGrid.setPrefHeight(Region.USE_COMPUTED_SIZE);
+          horizonGrid.setMaxHeight(Region.USE_COMPUTED_SIZE);
 
-        horizonGrid.add(anchorPane, column, i);
+          horizonGrid.add(anchorPane, column, i);
+        } catch (IOException e) {
+          System.out.println(e.getMessage());
+        }
       }
     }
   }
 
-  public void clearCart(ActionEvent event) throws IOException {
-    carts.removeAll(carts);
-    sceneController.switchSceneButton(event, "product-view.fxml");
+  public void clearCart(ActionEvent event) {
+    try {
+      carts.removeAll(carts);
+      sceneController.switchSceneButton(event, "product-view.fxml");
+    } catch (IOException e) {
+      System.out.println(e.getMessage());
+    }
   }
 
   public void confirmItem(ActionEvent event) {

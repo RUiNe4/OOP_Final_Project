@@ -94,15 +94,14 @@ public class Cart extends QueryCart {
 //    }
 //  }
 
-  public void addToCart(int productID, String productName, float productPrice, int productQty) throws Exception {
+  public void addToCart(int productID, String productName, float productPrice, int productQty) {
     setProductID(productID);
     setProductName(productName);
     setProductPrice(productPrice);
-    setProductPrice(productPrice);
-//    addCartQuery(productID, productName, productPrice, productQty);
+    setProductQty(productQty);
   }
 
-  public void displayCartProducts() throws Exception {
+  public void displayCartProducts() {
     System.out.println(cartProducts.size());
     for (int i = 0; i < cartProducts.size(); i++) {
       System.out.println("Product ID: " + cartProducts.get(i).productID);
@@ -120,15 +119,28 @@ public class Cart extends QueryCart {
     System.out.println("Product Qty: " + productQty);
   }
 
-  public void displayCartByID(int cartID) throws Exception {
-    displayCart(cartID);
+  public void displayCartByID(int cartID) {
+    try {
+      displayCart(cartID);
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
   }
 
-  public Cart searchProduct(int pid) throws Exception {
-    return searchFromProduct(pid);
+  public Cart searchProduct(int pid) {
+    try {
+      return searchFromProduct(pid);
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+    return null;
   }
-  public void updateCartItem(String productName, int productQty) throws SQLException {
-    updateCartProduct(productName, productQty);
+  public void updateCartItem(String productName, int productQty) {
+    try {
+      updateCartProduct(productName, productQty);
+    } catch (SQLException e) {
+      System.out.println(e.getMessage());
+    }
   }
 }
 
