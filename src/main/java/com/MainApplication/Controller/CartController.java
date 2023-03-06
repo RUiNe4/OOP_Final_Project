@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class CartController {
   private SceneController sceneController = new SceneController();
@@ -27,6 +28,8 @@ public class CartController {
   @FXML
   private Label totalPrice;
   private Cart cart;
+  private ProductController productController;
+  private ArrayList<Cart> carts;
 
   public CartController() throws Exception {
   }
@@ -38,11 +41,18 @@ public class CartController {
       System.out.println(e.getMessage());
     }
   }
-  public void increase(MouseEvent event){
-    System.out.println("Increase");
+  public void increase(MouseEvent event) throws Exception {
+    productController = new ProductController();
+    carts = productController.getCartProduct();
+    System.out.println(cart.getCartID());
+
+//    System.out.println("Increase");
+//    carts.get(0).displayItem();
   }
   public void decrease(MouseEvent event){
-    System.out.println("Decrease");
+//    System.out.println("Decrease");
+//    carts.get(0).displayItem();
+
   }
   public void setCart(Cart cart) {
     this.cart = cart;
