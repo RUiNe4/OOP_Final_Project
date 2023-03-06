@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Mar 01, 2023 at 06:05 PM
+-- Generation Time: Mar 06, 2023 at 05:28 PM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -20,8 +20,35 @@ SET time_zone = "+00:00";
 --
 -- Database: `possys`
 --
-CREATE DATABASE IF NOT EXISTS `possys` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+CREATE DATABASE IF NOT EXISTS `possys` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 USE `possys`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cartproducts`
+--
+
+DROP TABLE IF EXISTS `cartproducts`;
+CREATE TABLE IF NOT EXISTS `cartproducts` (
+  `cartID` int DEFAULT NULL,
+  `productID` int DEFAULT NULL,
+  `productName` varchar(64) DEFAULT NULL,
+  `productPrice` float DEFAULT NULL,
+  `productQty` int DEFAULT NULL,
+  `subPrice` float DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `cartproducts`
+--
+
+INSERT INTO `cartproducts` (`cartID`, `productID`, `productName`, `productPrice`, `productQty`, `subPrice`) VALUES
+(10002, 1065, 'Acer Nitro 5', 700, 2, 1400),
+(10002, 1065, 'Acer Nitro 5', 700, 3, 2100),
+(10001, 1068, 'Clock', 12.5, 3, 37.5),
+(10001, 1054, 'Laptop', 700, 1, 1400),
+(10002, 1068, 'Clock', 12.5, 6, 75);
 
 -- --------------------------------------------------------
 
@@ -37,14 +64,28 @@ CREATE TABLE IF NOT EXISTS `products` (
   `pQty` int DEFAULT '0',
   `productImg` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`pid`)
-) ENGINE=MyISAM AUTO_INCREMENT=1063 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=1069 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `products`
 --
 
 INSERT INTO `products` (`pid`, `pName`, `pPrice`, `pQty`, `productImg`) VALUES
-(1054, 'Laptop', 700, 1, NULL);
+(1054, 'Laptop', 700, 38, NULL),
+(1065, 'Acer Nitro 5', 700, 278, NULL),
+(1068, 'Clock', 12.5, 369, NULL),
+(1064, 'Monitor', 1290, 183, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `test`
+--
+
+DROP TABLE IF EXISTS `test`;
+CREATE TABLE IF NOT EXISTS `test` (
+  `testDate` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
