@@ -66,7 +66,7 @@ public class QueryCart {
   }
   protected void updateCartProduct(int productID, int productQty) throws SQLException {
     try{
-      String updateStm = "update from cartproducts set productQty = ? where productID = ?";
+      String updateStm = "update cartproducts set productQty = ? where productID = ?";
       st = connection.prepareStatement(updateStm);
       st.setInt(2, productID);
       st.setInt(1, productQty);

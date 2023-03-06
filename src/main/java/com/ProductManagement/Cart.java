@@ -14,6 +14,7 @@ public class Cart extends QueryCart {
   private int productQty;
   private int totalPrice;
   private int cartID;
+  private boolean seen;
   private final ArrayList<Cart> cartProducts = new ArrayList<>();
   private DBConnection con = new DBConnection();
   private Statement statement;
@@ -30,6 +31,10 @@ public class Cart extends QueryCart {
   // setter
   public void setProductName(String productName) {
     this.productName = productName;
+  }
+
+  public void setSeen(boolean seen) {
+    this.seen = seen;
   }
 
   public void setProductPrice(float productPrice) {
@@ -49,6 +54,11 @@ public class Cart extends QueryCart {
   }
 
   // getter
+
+  public boolean isSeen() {
+    return seen;
+  }
+
   public int getProductID() {return productID;}
 
   public String getProductName() {

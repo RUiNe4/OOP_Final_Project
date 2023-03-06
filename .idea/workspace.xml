@@ -7,15 +7,9 @@
     <list default="true" id="bf7a8ab0-e9b7-4e5e-881c-17b58dac5dc5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/DatabaseFunction/QueryCart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/DatabaseFunction/QueryCart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/DatabaseFunction/QueryProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/DatabaseFunction/QueryProduct.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/CartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/CartController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/GridController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/GridController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/SceneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/SceneController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ProductManagement/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ProductManagement/Cart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ProductManagement/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ProductManagement/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/added-item-list.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/added-item-list.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -51,14 +51,24 @@ public class GridController {
       product = product.searchProduct(product.getPid());
       cartProduct = new Cart();
       cartProduct = cartProduct.searchProduct(product.getPid());
-      cartProduct.setProductQty(1);
-      product.setpQty(product.getpQty() - 1);
-      product.updateProduct(product.getPid(), product.getpQty());
-
       if (cartProduct == null)
         throw new Exception("Null Product");
-      cartProduct.addToCart(product.getPid(), cartProduct.getProductName(), cartProduct.getProductPrice(), cartProduct.getProductQty());
-      ProductController.setCartProduct(cartProduct);
+
+      System.out.println("Seen: " + cartProduct.isSeen());
+      if(!cartProduct.isSeen()){
+        cartProduct.setProductQty(1);
+        cartProduct.setSeen(true);
+      }
+      System.out.println("[Grid Controller]");
+      System.out.println("Seen: " + cartProduct.isSeen());
+
+      product.setpQty(product.getpQty() - 1);
+      product.updateProduct(product.getPid(), product.getpQty());
+      if (cartProduct.isSeen()) {
+        cartProduct.addToCart(product.getPid(), cartProduct.getProductName(), cartProduct.getProductPrice(), cartProduct.getProductQty());
+      } else {
+        ProductController.setCartProduct(cartProduct);
+      }
       sceneController.switchSceneButton(event, "product-view.fxml");
     } catch (Exception e) {
       System.out.println(e.getMessage());
