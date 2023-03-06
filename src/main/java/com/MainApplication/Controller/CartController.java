@@ -24,40 +24,49 @@ public class CartController {
 
   @FXML
   private Label productQty;
-
   @FXML
-  private Label totalPrice;
+  private Label subTotalPrice;
   private Cart cart;
+  private Product product = new Product();
   private ProductController productController;
-  private ArrayList<Cart> carts;
 
   public CartController() throws Exception {
   }
-  public void deleteButton(ActionEvent event) {
+
+  public void removeButton(ActionEvent event) {
     try {
+      product = product.searchProduct(cart.getProductID());
+      product.updateProduct(cart.getProductID(), product.getpQty() +cart.getProductQty());
+      cart.setProductQty(0);
       sceneController.switchSceneButton(event, "product-view.fxml");
-      System.out.println("Product ID ::::  is Deleted");
     } catch (IOException e) {
       System.out.println(e.getMessage());
     }
   }
+
   public void increase(MouseEvent event) throws Exception {
-    productController = new ProductController();
-    carts = productController.getCartProduct();
-    System.out.println(cart.getCartID());
-
-//    System.out.println("Increase");
-//    carts.get(0).displayItem();
+    product = product.searchProduct(cart.getProductID());
+    productQty.setText(String.valueOf(cart.getProductQty()+1));
+    cart.setProductQty(cart.getProductQty()+1);
+    product.setpQty(product.getpQty()-1);
+    product.updateProduct(cart.getProductID(), product.getpQty());
+    sceneController.switchSceneButton(event, "product-view.fxml");
   }
-  public void decrease(MouseEvent event){
-//    System.out.println("Decrease");
-//    carts.get(0).displayItem();
 
+  public void decrease(MouseEvent event) throws Exception {
+    product = product.searchProduct(cart.getProductID());
+    productQty.setText(String.valueOf(cart.getProductQty()+1));
+    cart.setProductQty(cart.getProductQty()-1);
+    product.setpQty(product.getpQty()+1);
+    product.updateProduct(cart.getProductID(), product.getpQty());
+    sceneController.switchSceneButton(event, "product-view.fxml");
   }
+
   public void setCart(Cart cart) {
     this.cart = cart;
+    subTotalPrice.setText(String.valueOf(cart.getProductPrice()*cart.getProductQty()));
     productName.setText(cart.getProductName());
-    productPrice.setText(String.valueOf(cart.getProductPrice()));
+    productPrice.setText("$" + (cart.getProductPrice()));
     productQty.setText(String.valueOf(cart.getProductQty()));
   }
 }

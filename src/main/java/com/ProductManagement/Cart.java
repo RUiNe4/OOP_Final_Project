@@ -44,9 +44,13 @@ public class Cart extends QueryCart {
     this.cartID = cartID;
   }
 
-  public void setProductID(int productID) {this.productID = productID;}
-// getter
+  public void setProductID(int productID) {
+    this.productID = productID;
+  }
+
+  // getter
   public int getProductID() {return productID;}
+
   public String getProductName() {
     return productName;
   }
@@ -69,6 +73,7 @@ public class Cart extends QueryCart {
     while (resultSet.next()) {
       cart = new Cart();
       cart.setCartID(resultSet.getInt("cartID"));
+      cart.setProductID(resultSet.getInt("productID"));
       cart.setProductName(resultSet.getString("productName"));
       cart.setProductPrice(resultSet.getFloat("productPrice"));
       cart.setProductQty(resultSet.getInt("productQty"));
@@ -78,21 +83,29 @@ public class Cart extends QueryCart {
   }
 
   public int getID() throws Exception {
-    int tmpID = readCartDB().get((readCartDB().size() - 1)).getCartID();
-    return tmpID + 1;
+    if(readCartDB().isEmpty()){
+      return 10000;
+    } else {
+      int tmpID = readCartDB().get(readCartDB().size()-1).getCartID();
+      return tmpID + 1;
+    }
   }
 
-//  public void saveToDb(ArrayList<Cart> cart) throws SQLException {
-//    String insertStm = "insert into cartProducts (cartID, productName, productPrice, productQty) values (?, ?, ?, ?)";
-//    this.st = connection.prepareStatement(insertStm);
-//    for (int i = 0; i < cart.size(); i++) {
-//      st.setInt(1, cart.get(i).getCartID());
-//      st.setString(2, cart.get(i).getProductName());
-//      st.setFloat(3, cart.get(i).getProductPrice());
-//      st.setInt(4, cart.get(i).getProductQty());
-//      st.executeUpdate();
-//    }
-//  }
+  public void saveToDb(ArrayList<Cart> cart) throws Exception {
+    String insertStm = "insert into cartProducts (cartID, productID, productName, productPrice, productQty, subPrice) values (?, ?, ?, ?, ?, ?)";
+    this.st = connection.prepareStatement(insertStm);
+    int newID = getID();
+    for (int i = 0; i < cart.size(); i++) {
+      cart.get(i).setCartID(newID);
+      st.setInt(1, cart.get(i).getCartID());
+      st.setInt(2, cart.get(i).getProductID());
+      st.setString(3, cart.get(i).getProductName());
+      st.setFloat(4, cart.get(i).getProductPrice());
+      st.setInt(5, cart.get(i).getProductQty());
+      st.setFloat(6, cart.get(i).getProductQty()*cart.get(i).getProductPrice());
+      st.executeUpdate();
+    }
+  }
 
   public void addToCart(int productID, String productName, float productPrice, int productQty) {
     setProductID(productID);
@@ -101,8 +114,7 @@ public class Cart extends QueryCart {
     setProductQty(productQty);
   }
 
-  public void displayCartProducts() {
-    System.out.println(cartProducts.size());
+  public void displayCartProducts(ArrayList<Cart> cartProductst) {
     for (int i = 0; i < cartProducts.size(); i++) {
       System.out.println("Product ID: " + cartProducts.get(i).productID);
       System.out.println("Product name: " + cartProducts.get(i).productName);
@@ -135,9 +147,10 @@ public class Cart extends QueryCart {
     }
     return null;
   }
-  public void updateCartItem(String productName, int productQty) {
+
+  public void updateCartItem(int productID, int productQty) {
     try {
-      updateCartProduct(productName, productQty);
+      updateCartProduct(productID, productQty);
     } catch (SQLException e) {
       System.out.println(e.getMessage());
     }

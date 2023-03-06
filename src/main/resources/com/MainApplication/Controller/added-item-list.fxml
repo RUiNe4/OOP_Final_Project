@@ -36,12 +36,12 @@
                            <children>
                               <Label fx:id="prodExDate" prefHeight="25.0" prefWidth="48.0" text="Price: " underline="true">
                                  <font>
-                                    <Font size="16.0" />
+                                    <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="productPrice">
+                              <Label fx:id="productPrice" text="0.0" textFill="#eb6666">
                                  <font>
-                                    <Font size="16.0" />
+                                    <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
                            </children>
@@ -60,7 +60,10 @@
                                     <Font name="Calibri Bold" size="20.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="productQty" alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="33.0" text="0" />
+                              <Label fx:id="productQty" alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="33.0" text="0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></Label>
                               <Label alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#increase" prefHeight="26.0" prefWidth="33.0" text="+">
                                  <font>
                                     <Font name="Calibri Bold" size="20.0" />
@@ -68,7 +71,7 @@
                               </Label>
                            </children>
                         </HBox>
-                        <Label fx:id="totalPrice" text="\$0.0">
+                        <Label fx:id="subTotalPrice" text="\$0.0">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
@@ -76,7 +79,7 @@
                               <Insets right="10.0" />
                            </HBox.margin>
                         </Label>
-                        <Button id="deleteBtn" mnemonicParsing="false" onAction="#deleteButton" text="remove" />
+                        <Button id="deleteBtn" mnemonicParsing="false" onAction="#removeButton" text="remove" />
                      </children>
                   </HBox>
                </children>

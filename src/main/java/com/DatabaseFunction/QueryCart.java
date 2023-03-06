@@ -49,10 +49,9 @@ public class QueryCart {
     resultSet = st.executeQuery();
     if (resultSet.next()) {
       Cart item = new Cart();
-      item.setCartID(resultSet.getInt("pid") + 1000);
+      item.setProductID(resultSet.getInt("pid"));
       item.setProductName(resultSet.getString("pName"));
       item.setProductPrice(resultSet.getFloat("pPrice"));
-      item.setProductQty(resultSet.getInt("pQty"));
       return item;
     } else {
       return null;
@@ -65,12 +64,12 @@ public class QueryCart {
     st.setInt(1, cartID);
     st.executeUpdate();
   }
-  protected void updateCartProduct(String productName, int productQty) throws SQLException {
+  protected void updateCartProduct(int productID, int productQty) throws SQLException {
     try{
-      String updateStm = "update from cartproducts set productQty = ? where productName = ?";
+      String updateStm = "update from cartproducts set productQty = ? where productID = ?";
       st = connection.prepareStatement(updateStm);
-      st.setInt(1, productQty+1);
-      st.setString(2, productName);
+      st.setInt(2, productID);
+      st.setInt(1, productQty);
       st.executeUpdate();
     } catch (Exception e){
       System.out.println(e.getMessage());

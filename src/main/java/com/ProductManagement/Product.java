@@ -117,9 +117,9 @@ public class Product extends QueryProduct {
     }
   }
 
-  public void updateProduct(int pid, String pName) {
+  public void updateProduct(int pid, int pQty) {
     try {
-      updateQuery(pid, pName);
+      updateQtyQuery(pid, pQty);
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }

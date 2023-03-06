@@ -37,11 +37,10 @@ public class QueryProduct extends DBConnection {
     st.executeUpdate();
   }
 
-
-  public void updateQuery(int id, String name) throws Exception {
-    String updateStm = "update products set pName = ? where pid = ?";
+  protected void updateQtyQuery(int id, int productQty) throws Exception {
+    String updateStm = "update products set pQty = ? where pid = ?";
     st = connection.prepareStatement(updateStm);
-    st.setString(1, name);
+    st.setInt(1, productQty);
     st.setInt(2, id);
     st.executeUpdate();
   }

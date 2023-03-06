@@ -13,6 +13,7 @@ import javafx.scene.layout.Region;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -22,7 +23,7 @@ public class ProductController extends GridController implements Initializable {
   private static Cart cart;
   @FXML
   private GridPane verticalGrid;
-  private final Product product = new Product();
+  private Product product = new Product();
   @FXML
   private GridPane horizonGrid;
   @FXML
@@ -71,14 +72,8 @@ public class ProductController extends GridController implements Initializable {
     return carts;
   }
 
-  public ArrayList<Cart> getCartProduct() throws Exception {
-    ArrayList<Cart> items;
-    if (cart == null) {
-      return null;
-    } else {
-      items = setCartProduct(cart);
-      return items;
-    }
+  public int getCartProductID() throws Exception {
+    return cart.getProductID();
   }
 
   public void cartItem() {
@@ -114,6 +109,10 @@ public class ProductController extends GridController implements Initializable {
 
   public void clearCart(ActionEvent event) {
     try {
+      for(int i=0;i<carts.size();i++){
+        product = product.searchProduct(carts.get(i).getProductID());
+        product.updateProduct(carts.get(i).getProductID(), product.getpQty()+carts.get(i).getProductQty());
+      }
       carts.removeAll(carts);
       sceneController.switchSceneButton(event, "product-view.fxml");
     } catch (IOException e) {
@@ -121,8 +120,14 @@ public class ProductController extends GridController implements Initializable {
     }
   }
 
-  public void confirmItem(ActionEvent event) {
-
+  public void confirmItem(ActionEvent event) throws SQLException {
+    try {
+      cart.saveToDb(carts);
+      carts.removeAll(carts);
+      sceneController.switchSceneButton(event, "product-view.fxml");
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
   }
 
   @Override

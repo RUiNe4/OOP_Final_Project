@@ -36,20 +36,25 @@ public class GridController {
   }
 
   public void setData(Product product) {
-    try{
+    try {
       this.product = product;
       productName.setText(product.getpName());
       productPrice.setText(String.valueOf(product.getpPrice()));
       productQty.setText(String.valueOf(product.getpQty()));
-    } catch (Exception e){
+    } catch (Exception e) {
       System.out.println(e.getMessage());
     }
   }
 
   public void addCart(ActionEvent event) {
     try {
+      product = product.searchProduct(product.getPid());
       cartProduct = new Cart();
       cartProduct = cartProduct.searchProduct(product.getPid());
+      cartProduct.setProductQty(1);
+      product.setpQty(product.getpQty() - 1);
+      product.updateProduct(product.getPid(), product.getpQty());
+
       if (cartProduct == null)
         throw new Exception("Null Product");
       cartProduct.addToCart(product.getPid(), cartProduct.getProductName(), cartProduct.getProductPrice(), cartProduct.getProductQty());
