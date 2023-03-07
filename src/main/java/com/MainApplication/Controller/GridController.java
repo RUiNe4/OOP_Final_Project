@@ -37,15 +37,12 @@ public class GridController {
 
   public void addCart(ActionEvent event) {
     try {
-
       product = product.searchProduct(product.getPid());
       cartProduct = new Cart();
       cartProduct = cartProduct.searchProduct(product.getPid());
       if (cartProduct == null)
         throw new Exception("Null Product");
       cartProduct.setProductQty(1);
-//      System.out.println("[Grid Controller]");
-//      System.out.println("Seen: " + cartProduct.isSeen());
 
       product.setPqty(product.getPqty() - 1);
       product.updateProduct(product.getPid(), product.getPqty());
