@@ -1,19 +1,55 @@
 package com.ProductManagement;
 
 import com.DatabaseFunction.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 //import DatabaseFunction.QueryFunction;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class Product extends QueryProduct {
+public class Product extends QueryProduct{
   private int pid;
-  private String pName;
-  private Double pPrice;
-  private int pQty;
-  private ArrayList<Product> products = new ArrayList<>();
+  private String pname;
+  private int pqty;
+  private Double pprice;
+
   private Product product;
   private Statement statement;
   private DBConnection con = new DBConnection();
+  private ArrayList<Product> products = new ArrayList<>();
+
+
+  public int getPid() {
+    return pid;
+  }
+
+  public void setPid(int pid) {
+    this.pid = pid;
+  }
+
+  public String getPname() {
+    return pname;
+  }
+
+  public void setPname(String pname) {
+    this.pname = pname;
+  }
+
+  public int getPqty() {
+    return pqty;
+  }
+
+  public void setPqty(int pqty) {
+    this.pqty = pqty;
+  }
+
+  public Double getPprice() {
+    return pprice;
+  }
+
+  public void setPprice(Double pprice) {
+    this.pprice = pprice;
+  }
 
   public Product() throws Exception {
     super("jdbc:mysql://localhost:3306/possys", "root", "");
@@ -24,51 +60,15 @@ public class Product extends QueryProduct {
       System.out.println(e.getMessage());
     }
   }
-
-  //getter
-
-  public String getpName() {
-    return pName;
-  }
-
-  public Double getpPrice() {
-    return pPrice;
-  }
-
-  public int getpQty() {
-    return pQty;
-  }
-
-  public int getPid() {
-    return pid;
-  }
-  // setter
-
-  public void setPid(int pid) {
-    this.pid = pid;
-  }
-
-  public void setpName(String pName) {
-    this.pName = pName;
-  }
-
-  public void setpPrice(Double pPrice) {
-    this.pPrice = pPrice;
-  }
-
-  public void setpQty(Integer pQty) {
-    this.pQty = pQty;
-  }
-
   public ArrayList<Product> readFromDB() {
     try{
       ResultSet resultSet = statement.executeQuery("select * from products");
       while (resultSet.next()) {
         product = new Product();
         product.setPid(resultSet.getInt("pId"));
-        product.setpName(resultSet.getString("pName"));
-        product.setpPrice(resultSet.getDouble("pPrice"));
-        product.setpQty(resultSet.getInt("pQty"));
+        product.setPname(resultSet.getString("pName"));
+        product.setPprice(resultSet.getDouble("pPrice"));
+        product.setPqty(resultSet.getInt("pQty"));
         products.add(product);
       }
     } catch (Exception e){
@@ -79,24 +79,24 @@ public class Product extends QueryProduct {
 
   public void displayProduct() {
     System.out.println("Product ID: " + pid);
-    System.out.println("Product name: " + pName);
-    System.out.println("Product Price: " + pPrice);
-    System.out.println("Product Quantity: " + pQty);
+    System.out.println("Product name: " + pname);
+    System.out.println("Product Price: " + pprice);
+    System.out.println("Product Quantity: " + pqty);
   }
 
   public void displayProducts() {
     for (int i = 0; i < products.size(); i++) {
-      System.out.println("Product name: " + products.get(i).pName);
-      System.out.println("Product Price: " + products.get(i).pPrice);
-      System.out.println("Product Quantity: " + products.get(i).pQty);
+      System.out.println("Product name: " + products.get(i).pname);
+      System.out.println("Product Price: " + products.get(i).pprice);
+      System.out.println("Product Quantity: " + products.get(i).pqty);
       System.out.println();
     }
   }
 
   public void setProduct(String pName, double pPrice, int pQty) {
-    setpName(pName);
-    setpPrice(pPrice);
-    setpQty(pQty);
+    setPname(pName);
+    setPprice(pPrice);
+    setPqty(pQty);
   }
 
   public void addProduct(String pName, double pPrice, int pQty) {

@@ -5,8 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bf7a8ab0-e9b7-4e5e-881c-17b58dac5dc5" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/possys.sql/possys.sql" beforeDir="false" afterPath="$PROJECT_DIR$/possys.sql/possys.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/DatabaseFunction/QueryProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/DatabaseFunction/QueryProduct.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/CartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/CartController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/GridController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/GridController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ProductManagement/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ProductManagement/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +62,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/OOP-Project/mysql-connector-j-8.0.31.jar&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Projects/OOP_Final_Project/src/main/java/com/ProductManagement&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -69,10 +77,16 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Projects\OOP_Final_Project\src\main\java\com\ProductManagement" />
+      <recent name="D:\Projects\OOP_Final_Project\src\main\java\com\DatabaseFunction" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Projects\OOP_Final_Project\src\main\resources\com\MainApplication\Controller\Style" />
+      <recent name="D:\Projects\OOP_Final_Project\src\main\resources\com\MainApplication\Controller" />
+      <recent name="D:\Projects\OOP_Final_Project\src\main\java\com\DatabaseFunction" />
       <recent name="D:\OOP-Project\src\main\resources\com\MainApplication\Controller" />
       <recent name="D:\OOP_Final_Project\src\main\resources\images" />
-      <recent name="D:\OOP_Final_Project\src\main\resources\com\MainApplication\Controller" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.MainApplication.Controller" />
@@ -84,7 +98,7 @@
       <module name="demo" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ProductManagement.*" />
+          <option name="PATTERN" value="com.UserManagement.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -97,7 +111,7 @@
       <module name="demo" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ProductManagement.*" />
+          <option name="PATTERN" value="com.UserManagement.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -123,7 +137,7 @@
       <module name="demo" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ProductManagement.*" />
+          <option name="PATTERN" value="com.UserManagement.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -176,6 +190,11 @@
       <workItem from="1678030587682" duration="5152000" />
       <workItem from="1678068488874" duration="5589000" />
       <workItem from="1678153645809" duration="629000" />
+      <workItem from="1678155116464" duration="493000" />
+      <workItem from="1678156500098" duration="124000" />
+      <workItem from="1678157039845" duration="2270000" />
+      <workItem from="1678159404364" duration="1419000" />
+      <workItem from="1678161068130" duration="41000" />
     </task>
     <servers />
   </component>
