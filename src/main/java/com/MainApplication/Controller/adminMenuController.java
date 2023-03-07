@@ -26,64 +26,12 @@ public class adminMenuController implements Initializable{
   private Stage stage;
   private Scene scene;
   private Parent root;
+  private User user;
 
   //from age Spinner
   int ageValue;
-  @FXML
-  private TableView<User> table;
-  @FXML
-  private TableColumn<User, String> address;
-
-  @FXML
-  private TableColumn<User, Integer> age;
-
-  @FXML
-  private TableColumn<User, String> date;
-
-  @FXML
-  private TableColumn<User, String> email;
-
-  @FXML
-  private TableColumn<User, String> firstName;
-
-  @FXML
-  private TableColumn<User, String> gender;
-
-  @FXML
-  private TableColumn<User, Integer> id;
-
-  @FXML
-  private TableColumn<User, String> lastName;
-
-  @FXML
-  private TableColumn<User, String> password;
-
-  @FXML
-  private TableColumn<User, String> phone;
-
-  @FXML
-  private TableColumn<User, String> type;
-
-  @FXML
-  private TableColumn<User, String> userName;
-  @FXML
-  private TextField searchFilter;
-
-  @FXML
-  private Spinner<Integer> ageSpinner;
-
-  private User user;
-
-
-  @FXML private TableView<Product> pTable;
-  @FXML private TableColumn<Product,Integer> pID;
-  @FXML private TableColumn<Product,String> pName;
-  @FXML private TableColumn<Product,Double> pPrice;
-  @FXML private TableColumn<Product,Integer> pQty;
-
   ObservableList<User> list;
   ObservableList<Product> plist;
-
 
   @FXML
   @Override
@@ -145,58 +93,6 @@ public class adminMenuController implements Initializable{
     });
     table.setItems(filterUserList);
   }
-  @FXML
-  private Button employeeBtn;
-
-  @FXML
-  private Button updateBtn;
-
-  @FXML
-  private Button logoutBtn;
-
-  @FXML
-  private Button productBtn;
-
-  @FXML
-  private Button salesBtn;
-
-  @FXML
-  private Button settingBtn;
-  @FXML
-  private AnchorPane panelEmployee;
-
-  @FXML
-  private AnchorPane panelProduct;
-
-  @FXML
-  private AnchorPane panelSales;
-  @FXML
-  private AnchorPane updatePanel;
-
-  @FXML
-  private AnchorPane panelSetting;
-  @FXML
-  private TextField addressField;
-  @FXML
-  private TextField emailField;
-  @FXML
-  private TextField firstnameField;
-
-  @FXML
-  private TextField lastnameField;
-
-  @FXML
-  private TextField telephoneField;
-  @FXML
-  private TextField dateField;
-  @FXML
-  private TextField usernameField;
-  @FXML
-  private TextField idTextField;
-  @FXML
-  private RadioButton genderRB_M,genderRB_F;
-
-
   public void clearTextField(){
     firstnameField.clear();
     lastnameField.clear();
@@ -222,30 +118,6 @@ public class adminMenuController implements Initializable{
     ageField_Upd.clear();
   }
 
-  @FXML
-  private TextField ageField_Upd;
-  @FXML
-  private TextField dobField_Upd;
-  @FXML
-  private TextField emailField_Upd;
-  @FXML
-  private TextField firstnameField_Upd;
-  @FXML
-  private TextField genderField_Upd;
-  @FXML
-  private TextField idField;
-  @FXML
-  private TextField lastnameField_Upd;
-  @FXML
-  private TextField passField_Upd;
-  @FXML
-  private TextField phoneField_Upd;
-  @FXML
-  private TextField typeField_Upd;
-  @FXML
-  private TextField usernameField_Upd;
-  @FXML private TextField addressField_Upd;
-
   int index = -1;
 
   public void findEmployee(ActionEvent event){
@@ -265,6 +137,7 @@ public class adminMenuController implements Initializable{
         typeField_Upd.setText(user.getType());
         addressField_Upd.setText(user.getAddress());
         usernameField_Upd.setText(user.getUserName());
+        updatePanel.toFront();
       }
     }catch (Exception e){
       System.out.println(e.getMessage());
@@ -323,7 +196,7 @@ public class adminMenuController implements Initializable{
     clearTextField();
   }
   public void handleClicks(ActionEvent event) throws IOException {
-    if(event.getSource() == employeeBtn){
+    if(event.getSource() == employeeBtnEmp){
       panelEmployee.toFront();
     }else if(event.getSource() == productBtn){
       panelProduct.toFront();
@@ -331,8 +204,8 @@ public class adminMenuController implements Initializable{
       panelSales.toFront();
     }else if(event.getSource() == settingBtn) {
       panelSetting.toFront();
-    }else if(event.getSource() == updateBtn){
-      updatePanel.toFront();
+    }else if(event.getSource() == backBtn_UpdEmp){
+      panelEmployee.toFront();
     }else if(event.getSource() == logoutBtn){
       root = FXMLLoader.load(getClass().getResource("login-view.fxml"));
       stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -341,4 +214,69 @@ public class adminMenuController implements Initializable{
       stage.show();
     }
   }
+
+
+
+  //Buttons
+  @FXML private Button employeeBtnEmp;
+  @FXML private Button updateBtnEmp;
+  @FXML Button backBtn_UpdEmp;
+  @FXML private Button logoutBtn;
+  @FXML private Button productBtn;
+  @FXML private Button salesBtn;
+  @FXML private Button settingBtn;
+
+  //Anchor Pane
+  @FXML private AnchorPane panelEmployee;
+  @FXML private AnchorPane panelProduct;
+  @FXML private AnchorPane panelSales;
+  @FXML private AnchorPane updatePanel;
+  @FXML private AnchorPane panelSetting;
+
+  //Add Field
+  @FXML private TextField addressField;
+  @FXML private TextField emailField;
+  @FXML private TextField firstnameField;
+  @FXML private TextField lastnameField;
+  @FXML private TextField telephoneField;
+  @FXML private TextField dateField;
+  @FXML private TextField usernameField;
+  @FXML private TextField idTextField;
+  @FXML private RadioButton genderRB_M,genderRB_F;
+
+  //Update Field
+  @FXML private TextField ageField_Upd;
+  @FXML private TextField dobField_Upd;
+  @FXML private TextField emailField_Upd;
+  @FXML private TextField firstnameField_Upd;
+  @FXML private TextField genderField_Upd;
+  @FXML private TextField idField;
+  @FXML private TextField lastnameField_Upd;
+  @FXML private TextField passField_Upd;
+  @FXML private TextField phoneField_Upd;
+  @FXML private TextField typeField_Upd;
+  @FXML private TextField usernameField_Upd;
+  @FXML private TextField addressField_Upd;
+  //User Table Component
+  @FXML private TableView<User> table;
+  @FXML private TableColumn<User, String> address;
+  @FXML private TableColumn<User, Integer> age;
+  @FXML private TableColumn<User, String> date;
+  @FXML private TableColumn<User, String> email;
+  @FXML private TableColumn<User, String> firstName;
+  @FXML private TableColumn<User, String> gender;
+  @FXML private TableColumn<User, Integer> id;
+  @FXML private TableColumn<User, String> lastName;
+  @FXML private TableColumn<User, String> password;
+  @FXML private TableColumn<User, String> phone;
+  @FXML private TableColumn<User, String> type;
+  @FXML private TableColumn<User, String> userName;
+  @FXML private TextField searchFilter;
+  @FXML private Spinner<Integer> ageSpinner;
+  //Product Table Component
+  @FXML private TableView<Product> pTable;
+  @FXML private TableColumn<Product,Integer> pID;
+  @FXML private TableColumn<Product,String> pName;
+  @FXML private TableColumn<Product,Double> pPrice;
+  @FXML private TableColumn<Product,Integer> pQty;
 }
