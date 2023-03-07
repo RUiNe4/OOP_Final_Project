@@ -37,7 +37,7 @@
                   </Label>
                </children>
             </Pane>
-            <Button fx:id="employeeBtn" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#handleClicks" prefHeight="50.0" prefWidth="225.0" text="            Manage Employee" textFill="#f5f5f5">
+            <Button fx:id="employeeBtnEmp" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#handleClicks" prefHeight="50.0" prefWidth="225.0" text="            Manage Employee" textFill="#f5f5f5">
                <font>
                   <Font size="14.0" />
                </font>
@@ -84,27 +84,25 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="updatePanel" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #141318;">
+            <AnchorPane fx:id="panelProduct" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #141318;">
                <children>
-                  <Label layoutX="14.0" layoutY="14.0" prefHeight="35.0" prefWidth="152.0" text="Update Employee" textFill="#6b6b6b">
+                  <TableView fx:id="pTable" layoutY="392.0" prefHeight="361.0" prefWidth="1122.0" style="-fx-background-color: #222428;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                     <columns>
+                        <TableColumn id="tableColumn" fx:id="pID" prefWidth="131.20001220703125" resizable="false" text="ID" />
+                        <TableColumn id="tableColumn" fx:id="pName" prefWidth="272.8000183105469" resizable="false" text="Product Name" />
+                        <TableColumn id="tableColumn" fx:id="pQty" prefWidth="238.4000244140625" resizable="false" text="Qty" />
+                        <TableColumn id="tableColumn" fx:id="pPrice" prefWidth="260.0" resizable="false" text="Price" />
+                        <TableColumn id="tableColumn" fx:id="pPrice1" prefWidth="218.4000000000001" resizable="false" text="Type" />
+                     </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <Button layoutX="14.0" layoutY="348.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #222428;" text="Search" textFill="WHITESMOKE">
                      <font>
-                        <Font size="18.0" />
+                        <Font size="14.0" />
                      </font>
-                  </Label>
-                  <TextField fx:id="idField" layoutX="29.0" layoutY="77.0" promptText="Enter ID" style="-fx-background-color: #222428;" />
-                  <TextField fx:id="dobField_Upd" layoutX="29.0" layoutY="178.0" style="-fx-background-color: #222428;" />
-                  <TextField fx:id="genderField_Upd" layoutX="29.0" layoutY="216.0" style="-fx-background-color: #222428;" />
-                  <TextField fx:id="firstnameField_Upd" layoutX="199.0" layoutY="140.0" style="-fx-background-color: #222428;" />
-                  <TextField fx:id="usernameField_Upd" layoutX="199.0" layoutY="178.0" style="-fx-background-color: #222428;" />
-                  <TextField fx:id="typeField_Upd" layoutX="199.0" layoutY="216.0" style="-fx-background-color: #222428;" />
-                  <TextField fx:id="lastnameField_Upd" layoutX="363.0" layoutY="140.0" style="-fx-background-color: #222428;" />
-                  <TextField fx:id="passField_Upd" layoutX="363.0" layoutY="178.0" style="-fx-background-color: #222428;" />
-                  <TextField fx:id="emailField_Upd" layoutX="363.0" layoutY="216.0" style="-fx-background-color: #222428;" />
-                  <TextField fx:id="ageField_Upd" layoutX="527.0" layoutY="140.0" style="-fx-background-color: #222428;" />
-                  <Button layoutX="29.0" layoutY="253.0" mnemonicParsing="false" onAction="#editBtn" prefHeight="35.0" prefWidth="100.0" text="Update" textFill="#e8e8e8" />
-                  <TextField fx:id="phoneField_Upd" layoutX="527.0" layoutY="178.0" style="-fx-background-color: #222428;" />
-                  <Button layoutX="199.0" layoutY="72.0" mnemonicParsing="false" onAction="#findEmployee" prefHeight="35.0" prefWidth="100.0" text="Find" textFill="#e8e8e8" />
-                  <TextField fx:id="addressField_Upd" layoutX="527.0" layoutY="216.0" style="-fx-background-color: #222428;" />
+                  </Button>
                </children>
             </AnchorPane>
             <AnchorPane fx:id="panelEmployee" prefHeight="768.0" prefWidth="1142.0" style="-fx-background-color: #141318;">
@@ -128,12 +126,7 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <Button layoutX="10.0" layoutY="337.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #222428;" text="Search" textFill="WHITESMOKE" AnchorPane.bottomAnchor="396.0" AnchorPane.leftAnchor="10.0">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Button>
-                  <TextField fx:id="searchFilter" layoutX="107.0" layoutY="338.0" prefHeight="35.0" prefWidth="1000.0" promptText="Enter Username" style="-fx-background-color: #222428;" AnchorPane.rightAnchor="9.0" />
+                  <TextField fx:id="searchFilter" layoutX="107.0" layoutY="338.0" prefHeight="35.0" prefWidth="1122.0" promptText="Enter Username" style="-fx-background-color: #222428;" AnchorPane.rightAnchor="9.0" />
                   <Label layoutX="21.0" layoutY="29.0" text="Add a new employee" textFill="WHITESMOKE">
                      <font>
                         <Font name="Arial Bold" size="18.0" />
@@ -185,26 +178,102 @@
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="updateBtn" layoutX="21.0" layoutY="271.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="35.0" prefWidth="142.0" style="-fx-background-color: #222428;" text="Update Employee" textFill="WHITESMOKE">
+                  <Label layoutX="816.0" layoutY="176.0" text="Update Employee Info" textFill="WHITESMOKE">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="Arial Bold" size="18.0" />
                      </font>
-                  </Button>
+                  </Label>
+                  <TextField fx:id="idField" layoutX="816.0" layoutY="207.0" prefHeight="35.0" prefWidth="196.0" promptText="Enter ID" style="-fx-background-color: #222428;">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                  </TextField>
+                  <Button fx:id="updateBtnEmp" layoutX="816.0" layoutY="253.0" mnemonicParsing="false" onAction="#findEmployee" prefHeight="35.0" prefWidth="100.0" text="Update" textFill="#e8e8e8" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="panelProduct" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #141318;">
+            <AnchorPane fx:id="updatePanel" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #141318;">
                <children>
-                  <TableView fx:id="pTable" layoutY="322.0" prefHeight="361.0" prefWidth="1122.0" style="-fx-background-color: #222428;" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
-                     <columns>
-                        <TableColumn id="tableColumn" fx:id="pID" prefWidth="56.0" resizable="false" text="ID" />
-                        <TableColumn id="tableColumn" fx:id="pName" prefWidth="455.199951171875" resizable="false" text="Product Name" />
-                        <TableColumn id="tableColumn" fx:id="pQty" prefWidth="276.0" resizable="false" text="Qty" />
-                        <TableColumn id="tableColumn" fx:id="pPrice" prefWidth="333.5999755859375" resizable="false" text="Price" />
-                     </columns>
-                     <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                     </columnResizePolicy>
-                  </TableView>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="479.0" layoutY="30.0" prefHeight="35.0" prefWidth="226.0" text="Employee Information" textFill="WHITESMOKE">
+                     <font>
+                        <Font name="Arial Black" size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="dobField_Upd" layoutX="521.0205078125" layoutY="276.0" prefHeight="26.0" prefWidth="196.0" style="-fx-background-color: #222428;" />
+                  <TextField fx:id="genderField_Upd" layoutX="521.0205078125" layoutY="230.0" prefHeight="26.0" prefWidth="196.0" style="-fx-background-color: #222428;" />
+                  <TextField fx:id="firstnameField_Upd" layoutX="521.0205078125" layoutY="95.0" prefHeight="26.0" prefWidth="196.0" style="-fx-background-color: #222428;" />
+                  <TextField fx:id="usernameField_Upd" layoutX="521.0205078125" layoutY="460.0" prefHeight="26.0" prefWidth="196.0" style="-fx-background-color: #222428;" />
+                  <TextField fx:id="typeField_Upd" layoutX="521.0205078125" layoutY="551.0" prefHeight="26.0" prefWidth="196.0" style="-fx-background-color: #222428;" />
+                  <TextField fx:id="lastnameField_Upd" layoutX="521.0205078125" layoutY="141.0" prefHeight="26.0" prefWidth="196.0" style="-fx-background-color: #222428;" />
+                  <TextField fx:id="passField_Upd" layoutX="521.0205078125" layoutY="506.0" prefHeight="26.0" prefWidth="196.0" style="-fx-background-color: #222428;" />
+                  <TextField fx:id="emailField_Upd" layoutX="521.0205078125" layoutY="413.0" prefHeight="26.0" prefWidth="196.0" style="-fx-background-color: #222428;" />
+                  <TextField fx:id="ageField_Upd" layoutX="521.0205078125" layoutY="185.0" prefHeight="26.0" prefWidth="196.0" style="-fx-background-color: #222428;" />
+                  <Button layoutX="521.0" layoutY="603.0" mnemonicParsing="false" onAction="#editBtn" prefHeight="35.0" prefWidth="196.0" style="-fx-background-color: #3f8bf8;" text="Update" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <TextField fx:id="phoneField_Upd" layoutX="521.0205078125" layoutY="365.0" prefHeight="26.0" prefWidth="196.0" style="-fx-background-color: #222428;" />
+                  <TextField fx:id="addressField_Upd" layoutX="521.0205078125" layoutY="320.0" prefHeight="26.0" prefWidth="196.0" style="-fx-background-color: #222428;" />
+                  <Label layoutX="445.0205078125" layoutY="90.0" prefHeight="35.0" prefWidth="62.0" text="Firstname" textFill="WHITESMOKE">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="445.0205078125" layoutY="135.0" prefHeight="35.0" prefWidth="62.0" text="Lastname" textFill="WHITESMOKE">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="476.0205078125" layoutY="180.0" prefHeight="35.0" prefWidth="29.0" text="Age" textFill="WHITESMOKE">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="458.0205078125" layoutY="227.0" prefHeight="35.0" prefWidth="48.0" text="Gender" textFill="WHITESMOKE">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="452.0205078125" layoutY="315.0" prefHeight="35.0" prefWidth="54.0" text="Address" textFill="WHITESMOKE">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="437.0205078125" layoutY="362.0" prefHeight="35.0" prefWidth="70.0" text="Telephone" textFill="WHITESMOKE">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="428.0205078125" layoutY="273.0" prefHeight="35.0" prefWidth="78.0" text="Date of Birth" textFill="WHITESMOKE">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="467.0205078125" layoutY="408.0" prefHeight="35.0" prefWidth="40.0" text="Email" textFill="WHITESMOKE">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="438.0205078125" layoutY="458.0" prefHeight="35.0" prefWidth="70.0" text="Username" textFill="WHITESMOKE">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="446.0205078125" layoutY="501.0" prefHeight="35.0" prefWidth="62.0" text="Password" textFill="WHITESMOKE">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="425.0205078125" layoutY="546.0" prefHeight="35.0" prefWidth="85.0" text="Account Type" textFill="WHITESMOKE">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="backBtn_UpdEmp" layoutX="14.0" layoutY="17.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="35.0" prefWidth="70.0" style="-fx-background-color: #3f8bf8;" text="Back" textFill="WHITE" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
+                     <font>
+                        <Font name="Arial Bold" size="12.0" />
+                     </font>
+                  </Button>
                </children>
             </AnchorPane>
          </children>
