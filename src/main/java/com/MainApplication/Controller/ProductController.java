@@ -36,36 +36,36 @@ public class ProductController extends GridController implements Initializable {
 
 
 
-//  private void itemDisplay() {
-//    ArrayList<Product> products = product.readFromDB();
-//    int column = 0;
-//    int row = 1;
-//    for (int i = 0; i < products.size(); i++) {
-//      FXMLLoader fxmlLoader = new FXMLLoader(ProductController.class.getResource("item-view.fxml"));
-//      AnchorPane anchorPane = null;
-//      try {
-//        anchorPane = fxmlLoader.load();
-//      } catch (IOException e) {
-//        System.out.println(e.getMessage());
-//      }
-//      GridController gridController = fxmlLoader.getController();
-//      gridController.setData(products.get(i));
-//      if (column == 3) {
-//        column = 0;
-//        row++;
-//      }
-//      verticalGrid.setMinWidth(Region.USE_COMPUTED_SIZE);
-//      verticalGrid.setPrefWidth(Region.USE_COMPUTED_SIZE);
-//      verticalGrid.setMaxWidth(Region.USE_COMPUTED_SIZE);
-//
-//      verticalGrid.setMinHeight(Region.USE_COMPUTED_SIZE);
-//      verticalGrid.setPrefHeight(Region.USE_COMPUTED_SIZE);
-//      verticalGrid.setMaxHeight(Region.USE_COMPUTED_SIZE);
-//
-//      verticalGrid.add(anchorPane, column++, row);
-//      GridPane.setMargin(anchorPane, new Insets(10));
-//    }
-//  }
+  private void itemDisplay() {
+    ArrayList<Product> products = product.readFromDB();
+    int column = 0;
+    int row = 1;
+    for (int i = 0; i < products.size(); i++) {
+      FXMLLoader fxmlLoader = new FXMLLoader(ProductController.class.getResource("item-view.fxml"));
+      AnchorPane anchorPane = null;
+      try {
+        anchorPane = fxmlLoader.load();
+      } catch (IOException e) {
+        System.out.println(e.getMessage());
+      }
+      GridController gridController = fxmlLoader.getController();
+      gridController.setData(products.get(i));
+      if (column == 3) {
+        column = 0;
+        row++;
+      }
+      verticalGrid.setMinWidth(Region.USE_COMPUTED_SIZE);
+      verticalGrid.setPrefWidth(Region.USE_COMPUTED_SIZE);
+      verticalGrid.setMaxWidth(Region.USE_COMPUTED_SIZE);
+
+      verticalGrid.setMinHeight(Region.USE_COMPUTED_SIZE);
+      verticalGrid.setPrefHeight(Region.USE_COMPUTED_SIZE);
+      verticalGrid.setMaxHeight(Region.USE_COMPUTED_SIZE);
+
+      verticalGrid.add(anchorPane, column++, row);
+      GridPane.setMargin(anchorPane, new Insets(10));
+    }
+  }
 
   private final static ArrayList<Cart> carts = new ArrayList<>();
 
@@ -137,7 +137,7 @@ public class ProductController extends GridController implements Initializable {
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     try {
-//      itemDisplay();
+      itemDisplay();
       cartItem();
     } catch (Exception e) {
       System.out.println(e.getMessage());
