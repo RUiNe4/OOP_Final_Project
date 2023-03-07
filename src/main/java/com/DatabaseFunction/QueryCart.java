@@ -58,10 +58,16 @@ public class QueryCart {
     }
   }
 
-  protected void deleteFromCart(int cartID) throws Exception {
+  protected void deleteCart(int cartID) throws Exception {
     String deleteStm = "delete from cartproducts where cartID = ?";
     st = connection.prepareStatement(deleteStm);
     st.setInt(1, cartID);
+    st.executeUpdate();
+  }
+  protected void deleteCartProduct(int productID) throws Exception{
+    String deleteStm = "delete from cartproducts where productID = ?";
+    st = connection.prepareStatement(deleteStm);
+    st.setInt(1, productID);
     st.executeUpdate();
   }
   protected void updateCartProduct(int productID, int productQty) throws SQLException {

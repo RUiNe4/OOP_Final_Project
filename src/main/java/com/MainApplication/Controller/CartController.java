@@ -15,13 +15,10 @@ public class CartController {
   private SceneController sceneController = new SceneController();
   @FXML
   private Label prodExDate;
-
   @FXML
   private Label productName;
-
   @FXML
   private Label productPrice;
-
   @FXML
   private Label productQty;
   @FXML
@@ -45,12 +42,14 @@ public class CartController {
   }
 
   public void increase(MouseEvent event) throws Exception {
-    product = product.searchProduct(cart.getProductID());
+//    product = product.searchProduct(cart.getProductID());
     productQty.setText(String.valueOf(cart.getProductQty()+1));
     cart.setProductQty(cart.getProductQty()+1);
-    product.setpQty(product.getpQty()-1);
 
-    product.updateProduct(cart.getProductID(), product.getpQty());
+    product.setpQty(product.getpQty()-1);
+    System.out.println("[From Cart Controller], Product Qty: " + product.getpQty());
+//    product.updateProduct(cart.getProductID(), product.getpQty());
+
     sceneController.switchSceneButton(event, "product-view.fxml");
   }
 
@@ -59,8 +58,8 @@ public class CartController {
     productQty.setText(String.valueOf(cart.getProductQty()+1));
     cart.setProductQty(cart.getProductQty()-1);
     product.setpQty(product.getpQty()+1);
-
     product.updateProduct(cart.getProductID(), product.getpQty());
+
     sceneController.switchSceneButton(event, "product-view.fxml");
   }
 

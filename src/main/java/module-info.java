@@ -7,4 +7,6 @@ module com.MainApplication {
   opens com.MainApplication.Controller to javafx.fxml;
   exports com.ProductManagement;
   opens com.ProductManagement to javafx.fxml;
+  exports com.Others;
+  opens com.Others to javafx.fxml;
 }

@@ -3,6 +3,7 @@ package com.ProductManagement;
 import com.DatabaseFunction.DBConnection;
 import com.DatabaseFunction.QueryCart;
 import com.DatabaseFunction.QueryProduct;
+import com.DatabaseFunction.TemporaryQuery;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -20,8 +21,7 @@ public class Cart extends QueryCart {
   private Statement statement;
   private PreparedStatement st;
   private Connection connection;
-  Cart cart;
-
+  private Cart cart;
   public Cart() throws Exception {
     super("jdbc:mysql://localhost:3306/possys", "root", "");
     this.connection = con.getConnection("jdbc:mysql://localhost:3306/possys", "root", "");
@@ -165,7 +165,19 @@ public class Cart extends QueryCart {
       System.out.println(e.getMessage());
     }
   }
+  public void removeCart(int cartID){
+    try{
+      deleteCart(cartID);
+    } catch (Exception e){
+      System.out.println(e.getMessage());
+    }
+  }
+  public void removeCartProduct(int productID){
+    try{
+      deleteCartProduct(productID);
+    } catch (Exception e){
+      System.out.println(e.getMessage());
+    }
+  }
+
 }
-
-
-//  select cartid, group_concat(productName separator ', ') as "Product Name", GROUP_concat(productPrice separator ', ') as "ProductPrice", Group_concat(productQty separator ', ') as "Product Qty" from cartproducts group by cartId;

@@ -1,6 +1,5 @@
-package com.ProductManagement;
+package com.Others;
 import com.DatabaseFunction.*;
-//import DatabaseFunction.QueryFunction;
 import java.util.Scanner;
 
 public class GeneralFunction {
@@ -26,5 +25,4 @@ public class GeneralFunction {
     input = sc.nextLine();
     return input;
   }
-
 }

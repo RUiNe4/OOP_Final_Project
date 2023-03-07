@@ -1,5 +1,6 @@
 package com.MainApplication.Controller;
 
+import com.Others.GeneralFunction;
 import com.ProductManagement.Cart;
 import com.ProductManagement.Product;
 import javafx.application.Application;
@@ -23,7 +24,6 @@ public class Main extends Application {
   }
 
   public static void main(String[] args) throws Exception {
-//    Cart cart = new Cart();
     launch();
   }
 }
