@@ -19,11 +19,7 @@ public class GridController {
   @FXML
   private Label productPrice;
   private Product product;
-
-  public GridController() throws Exception {
-
-  }
-
+  public GridController() throws Exception {}
   public void setData(Product product) {
     try {
       this.product = product;
@@ -43,12 +39,26 @@ public class GridController {
       if (cartProduct == null)
         throw new Exception("Null Product");
       cartProduct.setProductQty(1);
-
-      product.setPqty(product.getPqty() - 1);
-      product.updateProduct(product.getPid(), product.getPqty());
-      cartProduct.addToCart(product.getPid(), cartProduct.getProductName(), cartProduct.getProductPrice(), cartProduct.getProductQty());
-      cartProduct.updateCartItem(cartProduct.getProductID(), cartProduct.getProductQty());
-      ProductController.setCartProduct(cartProduct);
+      cartProduct.addToCart(
+        product.getPid(),
+        cartProduct.getProductName(),
+        cartProduct.getProductPrice(),
+        cartProduct.getProductQty()
+      );
+      cartProduct.updateCartItem(
+        cartProduct.getProductID(),
+        cartProduct.getProductQty()
+      );
+      if(product.getPqty() == 1){
+        product.deleteProduct(product.getPid());
+      } else {
+        product.setPqty(product.getPqty()-1);
+        ProductController.setCartProduct(cartProduct);
+      }
+      product.updateProduct(
+        product.getPid(),
+        product.getPqty()
+      );
 
       sceneController.switchSceneButton(event, "product-view.fxml");
     } catch (Exception e) {

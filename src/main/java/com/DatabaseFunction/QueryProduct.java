@@ -1,9 +1,11 @@
 package com.DatabaseFunction;
 
-import com.ProductManagement.Cart;
 import com.ProductManagement.Product;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class QueryProduct extends DBConnection {
   private DBConnection con = new DBConnection();

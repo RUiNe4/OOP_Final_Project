@@ -2,8 +2,6 @@ package com.ProductManagement;
 
 import com.DatabaseFunction.DBConnection;
 import com.DatabaseFunction.QueryCart;
-import com.DatabaseFunction.QueryProduct;
-import com.DatabaseFunction.TemporaryQuery;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -92,7 +90,7 @@ public class Cart extends QueryCart {
     return cartProducts;
   }
 
-  public int getID() throws Exception {
+  public int generateID() throws Exception {
     if(readCartDB().isEmpty()){
       return 10000;
     } else {
@@ -104,7 +102,7 @@ public class Cart extends QueryCart {
   public void saveToDb(ArrayList<Cart> cart) throws Exception {
     String insertStm = "insert into cartProducts (cartID, productID, productName, productPrice, productQty, subPrice) values (?, ?, ?, ?, ?, ?)";
     this.st = connection.prepareStatement(insertStm);
-    int newID = getID();
+    int newID = generateID();
     for (int i = 0; i < cart.size(); i++) {
       cart.get(i).setCartID(newID);
       st.setInt(1, cart.get(i).getCartID());
@@ -124,7 +122,7 @@ public class Cart extends QueryCart {
     setProductQty(productQty);
   }
 
-  public void displayCartProducts(ArrayList<Cart> cartProductst) {
+  public void displayCartProducts(ArrayList<Cart> cartProducts) {
     for (int i = 0; i < cartProducts.size(); i++) {
       System.out.println("Product ID: " + cartProducts.get(i).productID);
       System.out.println("Product name: " + cartProducts.get(i).productName);

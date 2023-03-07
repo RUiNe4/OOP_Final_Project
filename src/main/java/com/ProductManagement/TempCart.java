@@ -28,7 +28,7 @@ public class TempCart extends TemporaryQuery {
     }
   }
 
-  public void addTemp(float productPrice) {
+  public void addTemp(double productPrice) {
     try {
       addToTemp(productPrice);
     } catch (Exception e) {

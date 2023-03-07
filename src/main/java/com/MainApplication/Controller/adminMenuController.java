@@ -1,9 +1,9 @@
 package com.MainApplication.Controller;
 
 import com.ProductManagement.ManageProduct;
-import com.UserManagement.User;
-import com.UserManagement.ManageEmployee;
 import com.ProductManagement.Product;
+import com.UserManagement.ManageEmployee;
+import com.UserManagement.User;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;

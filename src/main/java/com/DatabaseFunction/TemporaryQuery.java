@@ -16,7 +16,7 @@ public class TemporaryQuery {
 
   protected void createTempTable() throws SQLException {
     try {
-      String createTable = "create table TempTable(productPrice float)";
+      String createTable = "create table TempTable(productPrice double)";
       st = connection.prepareStatement(createTable);
       st.executeUpdate();
     } catch (Exception e) {
@@ -24,7 +24,7 @@ public class TemporaryQuery {
     }
   }
 
-  protected void addToTemp(float productPrice) throws SQLException {
+  protected void addToTemp(double productPrice) throws SQLException {
     String insertStm = "insert into temptable (productPrice) values (?)";
     st = connection.prepareStatement(insertStm);
     st.setDouble(1, productPrice);
