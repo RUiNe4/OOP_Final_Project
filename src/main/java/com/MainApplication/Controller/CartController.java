@@ -4,12 +4,10 @@ import com.ProductManagement.Cart;
 import com.ProductManagement.Product;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class CartController {
   private SceneController sceneController = new SceneController();
@@ -33,7 +31,7 @@ public class CartController {
   public void removeButton(ActionEvent event) {
     try {
       product = product.searchProduct(cart.getProductID());
-      product.updateProduct(cart.getProductID(), product.getpQty() +cart.getProductQty());
+      product.updateProduct(cart.getProductID(), product.getPqty() +cart.getProductQty());
       cart.setProductQty(0);
       sceneController.switchSceneButton(event, "product-view.fxml");
     } catch (IOException e) {
@@ -45,11 +43,9 @@ public class CartController {
 //    product = product.searchProduct(cart.getProductID());
     productQty.setText(String.valueOf(cart.getProductQty()+1));
     cart.setProductQty(cart.getProductQty()+1);
+    product.setPqty(product.getPqty()-1);
 
-    product.setpQty(product.getpQty()-1);
-    System.out.println("[From Cart Controller], Product Qty: " + product.getpQty());
-//    product.updateProduct(cart.getProductID(), product.getpQty());
-
+    product.updateProduct(cart.getProductID(), product.getPqty());
     sceneController.switchSceneButton(event, "product-view.fxml");
   }
 
@@ -57,9 +53,9 @@ public class CartController {
     product = product.searchProduct(cart.getProductID());
     productQty.setText(String.valueOf(cart.getProductQty()+1));
     cart.setProductQty(cart.getProductQty()-1);
-    product.setpQty(product.getpQty()+1);
-    product.updateProduct(cart.getProductID(), product.getpQty());
+    product.setPqty(product.getPqty()+1);
 
+    product.updateProduct(cart.getProductID(), product.getPqty());
     sceneController.switchSceneButton(event, "product-view.fxml");
   }
 

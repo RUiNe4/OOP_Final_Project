@@ -4,19 +4,8 @@ import com.ProductManagement.Cart;
 import com.ProductManagement.Product;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Region;
-
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 public class GridController {
   private final SceneController sceneController = new SceneController();
@@ -38,9 +27,9 @@ public class GridController {
   public void setData(Product product) {
     try {
       this.product = product;
-      productName.setText(product.getpName());
-      productPrice.setText(String.valueOf(product.getpPrice()));
-      productQty.setText(String.valueOf(product.getpQty()));
+      productName.setText(product.getPname());
+      productPrice.setText(String.valueOf(product.getPprice()));
+      productQty.setText(String.valueOf(product.getPqty()));
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
@@ -55,8 +44,11 @@ public class GridController {
       if (cartProduct == null)
         throw new Exception("Null Product");
       cartProduct.setProductQty(1);
-      product.setpQty(product.getpQty() - 1);
-      product.updateProduct(product.getPid(), product.getpQty());
+//      System.out.println("[Grid Controller]");
+//      System.out.println("Seen: " + cartProduct.isSeen());
+
+      product.setPqty(product.getPqty() - 1);
+      product.updateProduct(product.getPid(), product.getPqty());
       cartProduct.addToCart(product.getPid(), cartProduct.getProductName(), cartProduct.getProductPrice(), cartProduct.getProductQty());
       cartProduct.updateCartItem(cartProduct.getProductID(), cartProduct.getProductQty());
       ProductController.setCartProduct(cartProduct);

@@ -20,7 +20,7 @@ public class QueryProduct extends DBConnection {
   public void displayDB() throws Exception {
     resultSet = statement.executeQuery("select * from products");
     while (resultSet.next()) {
-      System.out.println("ID: " + resultSet.getString("pid"));
+      System.out.println("ID: " + resultSet.getString("pID"));
       System.out.println("Product name: " + resultSet.getString("pName"));
       System.out.println("Product Price: " + resultSet.getFloat("pPrice"));
       System.out.println("Product Quantity: " + resultSet.getInt("pQty"));
@@ -38,7 +38,7 @@ public class QueryProduct extends DBConnection {
   }
 
   protected void updateQtyQuery(int id, int productQty) throws Exception {
-    String updateStm = "update products set pQty = ? where pid = ?";
+    String updateStm = "update products set pQty = ? where pID = ?";
     st = connection.prepareStatement(updateStm);
     st.setInt(1, productQty);
     st.setInt(2, id);
@@ -46,16 +46,16 @@ public class QueryProduct extends DBConnection {
   }
 
   protected Product searchItem(int pid) throws Exception {
-    String searchStm = "select * from products where pid = ?";
+    String searchStm = "select * from products where pID = ?";
     st = connection.prepareStatement(searchStm);
     st.setInt(1, pid);
     resultSet = st.executeQuery();
     if (resultSet.next()) {
       Product item = new Product();
-      item.setPid(resultSet.getInt("pid"));
-      item.setpName(resultSet.getString("pName"));
-      item.setpPrice(resultSet.getDouble("pPrice"));
-      item.setpQty(resultSet.getInt("pQty"));
+      item.setPid(resultSet.getInt("pID"));
+      item.setPname(resultSet.getString("pName"));
+      item.setPprice(resultSet.getDouble("pPrice"));
+      item.setPqty(resultSet.getInt("pQty"));
       return item;
     } else {
       return null;
@@ -63,7 +63,7 @@ public class QueryProduct extends DBConnection {
   }
 
   protected void deleteItem(int pid) throws Exception {
-    String deleteStm = "delete from products where pid = ?";
+    String deleteStm = "delete from products where pID = ?";
     st = connection.prepareStatement(deleteStm);
     st.setInt(1, pid);
     st.executeUpdate();
