@@ -30,6 +30,7 @@ public class ProductController extends GridController implements Initializable {
   @FXML
   private Label cartStatus;
   private SceneController sceneController = new SceneController();
+//  private static boolean confirm = false;
 
   public ProductController() throws Exception {
   }

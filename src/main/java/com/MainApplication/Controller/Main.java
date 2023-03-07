@@ -30,7 +30,6 @@ public class Main extends Application {
   }
 
   public static void main(String[] args) throws Exception {
-//    Cart cart = new Cart();
     launch();
   }
 }
