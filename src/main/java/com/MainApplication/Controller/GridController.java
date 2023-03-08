@@ -2,12 +2,11 @@ package com.MainApplication.Controller;
 
 import com.ProductManagement.Cart;
 import com.ProductManagement.Product;
-import com.ProductManagement.TempCart;
+import com.ProductManagement.TempProduct;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.SubScene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 
@@ -15,25 +14,22 @@ public class GridController {
   private final SceneController sceneController = new SceneController();
   private Cart cartProduct;
   @FXML
-  private ImageView productImg;
-  @FXML
   private Label productName;
   @FXML
   private Label productQty;
   @FXML
   private Label productPrice;
-  private TempCart tempCart;
+  private TempProduct tempProduct;
   private Product product;
-
   public GridController() throws Exception {
   }
 
-  public void setData(TempCart tempCart) {
+  public void setData(TempProduct tempProduct) {
     try {
-      this.tempCart = tempCart;
-      productName.setText(tempCart.getProductName());
-      productPrice.setText(String.valueOf(tempCart.getProductPrice()));
-      productQty.setText(String.valueOf(tempCart.getProductQty()));
+      this.tempProduct = tempProduct;
+      productName.setText(tempProduct.getProductName());
+      productPrice.setText(String.valueOf(tempProduct.getProductPrice()));
+      productQty.setText(String.valueOf(tempProduct.getProductQty()));
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
@@ -42,44 +38,36 @@ public class GridController {
   public void addCart(ActionEvent event) {
     try {
       product = new Product();
-      product = product.searchProduct(tempCart.getProductID());
-      System.out.println("[Grid Controller]");
-      tempCart = tempCart.searchTemp(tempCart.getProductID());
-
+      product = product.searchProduct(tempProduct.getProductID());
+      tempProduct = tempProduct.searchTemp(tempProduct.getProductID());
       cartProduct = new Cart();
-      cartProduct = cartProduct.searchProduct(tempCart.getProductID());
-
+      cartProduct = cartProduct.searchProduct(tempProduct.getProductID());
       if (cartProduct == null) {
         throw new Exception("Null Product");
-      }
-      cartProduct.setProductQty(1); // set cart product to 1
-      cartProduct.addToCart(
-        tempCart.getProductID(),
-        cartProduct.getProductName(),
-        cartProduct.getProductPrice(),
-        cartProduct.getProductQty()
-      );
-      cartProduct.updateCartItem(
-        cartProduct.getProductID(),
-        cartProduct.getProductQty()
-      );
-      if (tempCart.getProductQty() == 0) {
-        tempCart.deleteItem(tempCart.getProductID());
+      } else if (tempProduct.getProductQty() == 0) {
+        tempProduct.deleteItem(tempProduct.getProductID());
+        sceneController.switchSceneButton(event, "product-view.fxml");
       } else {
-        tempCart.setProductQty(tempCart.getProductQty() - 1);
-        if (product.getPqty() - tempCart.getProductQty() == 1) {
+        tempProduct.setProductQty(tempProduct.getProductQty() - 1);
+        if (product.getPqty() - tempProduct.getProductQty() == 1) {
+          cartProduct.setProductQty(1); // set cart product to 1
+          cartProduct.addToCart(
+            tempProduct.getProductID(),
+            cartProduct.getProductName(),
+            cartProduct.getProductPrice(),
+            cartProduct.getProductQty()
+          );
           ProductController.setCartProduct(cartProduct);
         } else {
-//          cartProduct.setProductQty(cartProduct.getProductQty() + 1);
-
+          cartProduct = ProductController.getCart();
+          cartProduct.setProductQty(ProductController.getCart().getProductQty()+1);
         }
+        tempProduct.updateTempCart(
+          tempProduct.getProductID(),
+          tempProduct.getProductQty()
+        );
+        sceneController.switchSceneButton(event, "product-view.fxml");
       }
-
-      tempCart.updateTempCart(
-        tempCart.getProductID(),
-        tempCart.getProductQty()
-      );
-      sceneController.switchSceneButton(event, "product-view.fxml");
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }

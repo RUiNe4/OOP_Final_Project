@@ -1,13 +1,12 @@
 package com.ProductManagement;
 
 import com.DatabaseFunction.DBConnection;
-import com.DatabaseFunction.TemporaryQuery;
-import com.itextpdf.text.pdf.languages.ArabicLigaturizer;
+import com.DatabaseFunction.TemporaryProductQuery;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-public class TempCart extends TemporaryQuery {
+public class TempProduct extends TemporaryProductQuery {
   private DBConnection con = new DBConnection();
   private Statement statement;
   private PreparedStatement st;
@@ -16,8 +15,8 @@ public class TempCart extends TemporaryQuery {
   private String productName;
   private int productQty;
   private double productPrice;
-  private TempCart tempCart;
-  private ArrayList<TempCart> tempCarts = new ArrayList<>();
+  private TempProduct tempProduct;
+  private ArrayList<TempProduct> tempProducts = new ArrayList<>();
   public void setProductID(int productID) {
     this.productID = productID;
   }
@@ -50,21 +49,21 @@ public class TempCart extends TemporaryQuery {
     return productPrice;
   }
 
-  public TempCart() throws Exception {
+  public TempProduct() throws Exception {
     super("jdbc:mysql://localhost:3306/possys", "root", "");
     this.connection = con.getConnection("jdbc:mysql://localhost:3306/possys", "root", "");
     this.statement = connection.createStatement();
   }
-  public ArrayList<TempCart> readFromDB() {
+  public ArrayList<TempProduct> readFromDB() {
     try{
       ResultSet resultSet = statement.executeQuery("select * from temptable");
       while (resultSet.next()) {
-        tempCart = new TempCart();
-        tempCart.setProductID(resultSet.getInt("productID"));
-        tempCart.setProductName(resultSet.getString("productName"));
-        tempCart.setProductPrice(resultSet.getDouble("productPrice"));
-        tempCart.setProductQty(resultSet.getInt("productQty"));
-        tempCarts.add(tempCart);
+        tempProduct = new TempProduct();
+        tempProduct.setProductID(resultSet.getInt("productID"));
+        tempProduct.setProductName(resultSet.getString("productName"));
+        tempProduct.setProductPrice(resultSet.getDouble("productPrice"));
+        tempProduct.setProductQty(resultSet.getInt("productQty"));
+        tempProducts.add(tempProduct);
       }
 
       statement.close();
@@ -72,7 +71,7 @@ public class TempCart extends TemporaryQuery {
     } catch (Exception e){
       System.out.println(e.getMessage());
     }
-    return tempCarts;
+    return tempProducts;
   }
 
   public void createTable() {
@@ -98,7 +97,7 @@ public class TempCart extends TemporaryQuery {
       System.out.println(e.getMessage());
     }
   }
-  public TempCart searchProduct(int pid){
+  public TempProduct searchProduct(int pid){
     try {
       return searchFromProduct(pid);
     } catch (Exception e) {
@@ -106,7 +105,7 @@ public class TempCart extends TemporaryQuery {
     }
     return null;
   }
-  public TempCart searchTemp(int productId){
+  public TempProduct searchTemp(int productId){
     try {
       return searchFromTemp(productId);
     } catch (Exception e) {

@@ -1,16 +1,16 @@
 package com.DatabaseFunction;
 
-import com.ProductManagement.TempCart;
+import com.ProductManagement.TempProduct;
 
 import java.sql.*;
 
-public class TemporaryQuery {
+public class TemporaryProductQuery {
   private DBConnection con = new DBConnection();
   private final Statement statement;
   private final Connection connection;
   private PreparedStatement st;
   private ResultSet resultSet;
-  public TemporaryQuery(String url, String user, String password) throws Exception {
+  public TemporaryProductQuery(String url, String user, String password) throws Exception {
     this.connection = con.getConnection(url, user, password);
     this.statement = connection.createStatement();
   }
@@ -54,13 +54,13 @@ public class TemporaryQuery {
 
     st.close();
   }
-  protected TempCart searchFromTemp(int productId) throws Exception{
+  protected TempProduct searchFromTemp(int productId) throws Exception{
     String searchStm = "select * from temptable where productID = ?";
     st = connection.prepareStatement(searchStm);
     st.setInt(1, productId);
     resultSet = st.executeQuery();
     if (resultSet.next()) {
-      TempCart item = new TempCart();
+      TempProduct item = new TempProduct();
       item.setProductID(resultSet.getInt("productID"));
       item.setProductName(resultSet.getString("productName"));
       item.setProductPrice(resultSet.getFloat("productPrice"));
@@ -73,13 +73,13 @@ public class TemporaryQuery {
       return null;
     }
   }
-  protected TempCart searchFromProduct(int pid) throws Exception {
+  protected TempProduct searchFromProduct(int pid) throws Exception {
     String searchStm = "select * from products where pid = ?";
     st = connection.prepareStatement(searchStm);
     st.setInt(1, pid);
     resultSet = st.executeQuery();
     if (resultSet.next()) {
-      TempCart item = new TempCart();
+      TempProduct item = new TempProduct();
       item.setProductID(resultSet.getInt("pid"));
       item.setProductName(resultSet.getString("pName"));
       item.setProductPrice(resultSet.getFloat("pPrice"));

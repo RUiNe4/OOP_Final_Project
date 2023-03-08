@@ -6,16 +6,20 @@
   <component name="ChangeListManager">
     <list default="true" id="bf7a8ab0-e9b7-4e5e-881c-17b58dac5dc5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/DatabaseFunction/QueryCart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/DatabaseFunction/QueryCart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/DatabaseFunction/QueryProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/DatabaseFunction/QueryProduct.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/DatabaseFunction/TemporaryQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/DatabaseFunction/TemporaryQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/DatabaseFunction/TemporaryQuery.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/CartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/CartController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/GridController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/GridController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/ProductController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ProductManagement/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ProductManagement/Cart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ProductManagement/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ProductManagement/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ProductManagement/TempCart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ProductManagement/TempCart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ProductManagement/TempCart.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/Style/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/Style/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/added-item-list.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/added-item-list.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/invoice/10000.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/invoice/10001.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/invoice/pdfTest.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/item-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/item-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/product-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/product-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -209,7 +213,7 @@
       <workItem from="1678212180244" duration="4146000" />
       <workItem from="1678216498885" duration="673000" />
       <workItem from="1678244011686" duration="6920000" />
-      <workItem from="1678266088328" duration="3272000" />
+      <workItem from="1678266088328" duration="17094000" />
     </task>
     <servers />
   </component>

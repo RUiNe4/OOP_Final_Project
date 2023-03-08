@@ -2,27 +2,21 @@ package com.MainApplication.Controller;
 
 import com.ProductManagement.Cart;
 import com.ProductManagement.Product;
-import com.ProductManagement.TempCart;
+import com.ProductManagement.TempProduct;
 import com.itextpdf.text.Document;
-import com.itextpdf.text.Header;
-import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.SubScene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Region;
-import com.itextpdf.text.pdf.PdfWriter;
+import javafx.scene.layout.*;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -38,7 +32,7 @@ public class ProductController extends GridController implements Initializable {
   @FXML
   private GridPane verticalGrid;
   private Product product = new Product();
-  private TempCart tempCart = new TempCart();
+  private TempProduct tempProduct = new TempProduct();
   @FXML
   private GridPane horizonGrid;
   @FXML
@@ -49,31 +43,31 @@ public class ProductController extends GridController implements Initializable {
   public ProductController() throws Exception {
   }
 
-  private static ArrayList<TempCart> tempCarts = new ArrayList<>();
+  private static ArrayList<TempProduct> tempProducts = new ArrayList<>();
 
   private void itemDisplay() throws Exception {
-    TempCart tempCart = new TempCart();
+    TempProduct tempProduct = new TempProduct();
     if (!read) {
       ArrayList<Product> products = product.readFromDB();
-      tempCart.createTable();
+      tempProduct.createTable();
       //copy from product db to tempcart db
       for (int i = 0; i < products.size(); i++) {
-        tempCart = tempCart.searchProduct(products.get(i).getPid());
-        tempCart.addTemp(tempCart.getProductID(), tempCart.getProductName(), tempCart.getProductPrice(), tempCart.getProductQty());
-        tempCarts.add(tempCart);
+        tempProduct = tempProduct.searchProduct(products.get(i).getPid());
+        tempProduct.addTemp(tempProduct.getProductID(), tempProduct.getProductName(), tempProduct.getProductPrice(), tempProduct.getProductQty());
+        tempProducts.add(tempProduct);
       }
       read = true;
     } else {
-      tempCarts = tempCart.readFromDB();
+      tempProducts = tempProduct.readFromDB();
     }
     int column = 0;
     int row = 1;
 
-    for (int i = 0; i < tempCarts.size(); i++) {
+    for (int i = 0; i < tempProducts.size(); i++) {
       FXMLLoader fxmlLoader = new FXMLLoader(ProductController.class.getResource("item-view.fxml"));
-      AnchorPane anchorPane = fxmlLoader.load();
+      HBox hBox = fxmlLoader.load();
       GridController gridController = fxmlLoader.getController();
-      gridController.setData(tempCarts.get(i));
+      gridController.setData(tempProducts.get(i));
       if (column == 3) {
         column = 0;
         row++;
@@ -86,8 +80,8 @@ public class ProductController extends GridController implements Initializable {
       verticalGrid.setPrefHeight(Region.USE_COMPUTED_SIZE);
       verticalGrid.setMaxHeight(Region.USE_COMPUTED_SIZE);
 
-      verticalGrid.add(anchorPane, column++, row);
-      GridPane.setMargin(anchorPane, new Insets(10));
+      verticalGrid.add(hBox, column++, row);
+      GridPane.setMargin(hBox, new Insets(5));
     }
   }
 
@@ -97,12 +91,15 @@ public class ProductController extends GridController implements Initializable {
     return carts;
   }
 
+  public static Cart getCart() {
+    return cart;
+  }
+
   public static void removeFromCart(Cart cart) {
     carts.remove(cart);
   }
 
   public void cartItem() {
-    System.out.println("[Prod C]");
     int column = 1;
     if (carts.isEmpty()) {
       cartStatus.setText("Empty Cart");
@@ -115,6 +112,7 @@ public class ProductController extends GridController implements Initializable {
           CartController cartController = fxmlLoader.getController();
           cartController.setCart(carts.get(i));
           horizonGrid.add(anchorPane, column, i);
+          GridPane.setMargin(anchorPane, new Insets(5));
         } catch (IOException e) {
           System.out.println(e.getMessage());
         }
@@ -125,12 +123,12 @@ public class ProductController extends GridController implements Initializable {
   public void clearCart(ActionEvent event) throws Exception {
     try {
       for (int i = 0; i < carts.size(); i++) {
-        tempCart = tempCart.searchTemp(carts.get(i).getProductID());
-        if (tempCart == null) {
-          tempCart = new TempCart();
-          tempCart.addTemp(carts.get(i).getProductID(), carts.get(i).getProductName(), carts.get(i).getProductPrice(), carts.get(i).getProductQty());
+        tempProduct = tempProduct.searchTemp(carts.get(i).getProductID());
+        if (tempProduct == null) {
+          tempProduct = new TempProduct();
+          tempProduct.addTemp(carts.get(i).getProductID(), carts.get(i).getProductName(), carts.get(i).getProductPrice(), carts.get(i).getProductQty());
         } else {
-          tempCart.updateTempCart(carts.get(i).getProductID(), tempCart.getProductQty() + carts.get(i).getProductQty());
+          tempProduct.updateTempCart(carts.get(i).getProductID(), tempProduct.getProductQty() + carts.get(i).getProductQty());
         }
       }
       carts.removeAll(carts);
@@ -140,7 +138,7 @@ public class ProductController extends GridController implements Initializable {
     }
   }
 
-  public void confirmItem(ActionEvent event) throws SQLException {
+  public void confirmItem(ActionEvent event) throws Exception {
     try {
       Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
       alert.setTitle("Are you Sure?");
@@ -148,18 +146,15 @@ public class ProductController extends GridController implements Initializable {
       alert.setContentText("Print Order?");
       Optional<ButtonType> result = alert.showAndWait();
       if (result.get() == ButtonType.OK) {
+          System.out.println("[From product controller]");
         for (int i = 0; i < carts.size(); i++) {
-          System.out.println("[From prod c]");
+          product = new Product();
           product = product.searchProduct(carts.get(i).getProductID());
-          product.displayProduct();
-          product.updateProduct(carts.get(i).getProductID(), product.getPqty() - carts.get(i).getProductQty());
-          System.out.println("=================================");
-          System.out.println("After");
+          product.updateProduct(carts.get(i).getProductID(), (product.getPqty() - carts.get(i).getProductQty()));
           product.displayProduct();
         }
         cart.saveToDb(carts);
-        carts.removeAll(carts);
-
+        carts.clear();
         sceneController.switchSceneButton(event, "product-view.fxml");
       } else {
         Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
@@ -170,7 +165,7 @@ public class ProductController extends GridController implements Initializable {
       }
 //      System.out.println("[Product Controller]");
 //      System.out.println("Cart ID: " + cart.generateID());
-//      String filePath = "D:\\OOP_Final_Project\\src\\main\\resources\\com\\MainApplication\\Controller\\invoice\\" + cart.generateID() + ".pdf";
+//      String filePath = "D:\\OOP_Final_Project\\src\\main\\resources\\com\\MainApplication\\Controller\\invoice\\RCPT" + cart.generateID() + ".pdf";
 //
 //      Document document = new Document();
 //      PdfWriter.getInstance(document, new FileOutputStream(filePath));
@@ -187,15 +182,13 @@ public class ProductController extends GridController implements Initializable {
 //      table.addCell(c1);
 //      table.setHeaderRows(1);
 //
-//      for(int i=0;i<carts.size();i++){
-//        table.addCell(carts.get(i).getProductName());
-//        table.addCell(String.valueOf(carts.get(i).getProductPrice()));
-//        table.addCell(String.valueOf(carts.get(i).getProductQty()));
-//      }
-//
+//      table.addCell(carts.get(i).getProductName());
+//      table.addCell(String.valueOf(carts.get(i).getProductPrice()));
+//      table.addCell(String.valueOf(carts.get(i).getProductQty()));
 //      document.add(table);
-//      document.close();
 //
+//
+//      document.close();
 //      System.out.println("Done");
     } catch (Exception e) {
       System.out.println(e.getMessage());

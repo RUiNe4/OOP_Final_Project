@@ -82,7 +82,9 @@ public class Cart extends QueryCart {
     if(readCartDB().isEmpty()){
       return 10000;
     } else {
-      int tmpID = readCartDB().get(readCartDB().size()-1).getCartID();
+      System.out.println("[From Cart]");
+      int tmpID = cartProducts.get(readCartDB().size()-1).getCartID();
+      System.out.println(tmpID);
       return tmpID + 1;
     }
   }
@@ -101,6 +103,7 @@ public class Cart extends QueryCart {
       st.setFloat(6, cart.get(i).getProductQty()*cart.get(i).getProductPrice());
       st.executeUpdate();
     }
+    st.close();
   }
 
   public void addToCart(int productID, String productName, float productPrice, int productQty) {
@@ -108,16 +111,6 @@ public class Cart extends QueryCart {
     setProductName(productName);
     setProductPrice(productPrice);
     setProductQty(productQty);
-  }
-
-  public void displayCartProducts(ArrayList<Cart> cartProducts) {
-    for (int i = 0; i < cartProducts.size(); i++) {
-      System.out.println("Product ID: " + cartProducts.get(i).productID);
-      System.out.println("Product name: " + cartProducts.get(i).productName);
-      System.out.println("Product Price: " + cartProducts.get(i).productPrice);
-      System.out.println("Product Quantity: " + cartProducts.get(i).productQty);
-      System.out.println();
-    }
   }
 
   public void displayItem() {
