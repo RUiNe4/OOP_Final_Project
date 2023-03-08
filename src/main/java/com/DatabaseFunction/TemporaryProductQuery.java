@@ -3,6 +3,7 @@ package com.DatabaseFunction;
 import com.ProductManagement.TempProduct;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class TemporaryProductQuery {
   private DBConnection con = new DBConnection();
@@ -107,4 +108,27 @@ public class TemporaryProductQuery {
     st.executeUpdate();
     st.close();
   }
+//  protected ArrayList<TempProduct> filterDB(String pType){
+//    try {
+//      String filterStm = "select * from temptable where pType = ?";
+//      ArrayList<TempProduct> tempProducts = new ArrayList<>();
+//      st = connection.prepareStatement(filterStm);
+//      st.setString(1, pType);
+//      st.executeUpdate();
+//      resultSet = st.executeQuery();
+//      while (resultSet.next()) {
+//        TempProduct tempProduct = new TempProduct();
+//        tempProduct.setProductID(resultSet.getInt("productID"));
+//        tempProduct.setProductName(resultSet.getString("productName"));
+//        tempProduct.setProductPrice(resultSet.getDouble("productPrice"));
+//        tempProduct.setProductQty(resultSet.getInt("productQty"));
+//        tempProduct.setProductType(resultSet.getString("ptype"));
+//        tempProducts.add(tempProduct);
+//      }
+//      return tempProducts;
+//    } catch (Exception e) {
+//      System.out.println(e.getMessage());
+//    }
+//    return null;
+//  }
 }

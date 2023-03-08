@@ -8,6 +8,8 @@ import com.UserManagement.User;
 import com.ProductManagement.Product;
 import com.ProductManagement.TempProduct;
 import com.itextpdf.text.Document;
+import com.itextpdf.text.Header;
+import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
@@ -20,7 +22,9 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
+import javafx.scene.text.Text;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -41,17 +45,18 @@ public class ProductController extends GridController implements Initializable {
   private GridPane horizonGrid;
   @FXML
   private Label cartStatus;
-
-  ManageEmployee manageEmployee = new ManageEmployee();
+  @FXML
+  private Label userName;
+  @FXML
+  private TextField searchProduct;
+  private ManageEmployee manageEmployee = new ManageEmployee();
   private User user = manageEmployee.getUserByActive();
 
   private SceneController sceneController = new SceneController();
   private final static ArrayList<Cart> carts = new ArrayList<>();
 
   public ProductController() throws Exception {
-    System.out.println(user.getUserID());
   }
-
 
   private static ArrayList<TempProduct> tempProducts = new ArrayList<>();
 
@@ -78,7 +83,7 @@ public class ProductController extends GridController implements Initializable {
       HBox hBox = fxmlLoader.load();
       GridController gridController = fxmlLoader.getController();
       gridController.setData(tempProducts.get(i));
-      if (column == 3) {
+      if (column == 2) {
         column = 0;
         row++;
       }
@@ -91,7 +96,7 @@ public class ProductController extends GridController implements Initializable {
       verticalGrid.setMaxHeight(Region.USE_COMPUTED_SIZE);
 
       verticalGrid.add(hBox, column++, row);
-      GridPane.setMargin(hBox, new Insets(5));
+      GridPane.setMargin(hBox, new Insets(10));
     }
   }
 
@@ -149,23 +154,23 @@ public class ProductController extends GridController implements Initializable {
   }
 
   public void confirmItem(ActionEvent event) throws Exception {
+    float tmpTotal = 0;
     try {
       Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-      alert.setTitle("Are you Sure?");
-      alert.setHeaderText("Testing");
-      alert.setContentText("Print Order?");
+      alert.setTitle("POS - SYSTEM");
+      alert.setHeaderText("PRINT ORDER?");
+      alert.setContentText("CONFIRM");
       Optional<ButtonType> result = alert.showAndWait();
       if (result.get() == ButtonType.OK) {
-          System.out.println("[From product controller]");
         for (int i = 0; i < carts.size(); i++) {
           product = new Product();
           product = product.searchProduct(carts.get(i).getProductID());
+          tmpTotal += carts.get(i).getTotal();
           product.updateProduct(carts.get(i).getProductID(), (product.getPqty() - carts.get(i).getProductQty()));
-          product.displayProduct();
+          carts.get(i).setCartID(cart.generateID());
         }
+        cart.setTotalPrice(tmpTotal);
         cart.saveToDb(carts);
-        carts.clear();
-        sceneController.switchSceneButton(event, "product-view.fxml");
       } else {
         Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
         alert1.setTitle("POS - Group 7");
@@ -173,41 +178,87 @@ public class ProductController extends GridController implements Initializable {
         alert1.setContentText("Feel Free to add more Products");
         alert1.showAndWait();
       }
-//      System.out.println("[Product Controller]");
-//      System.out.println("Cart ID: " + cart.generateID());
-//      String filePath = "D:\\OOP_Final_Project\\src\\main\\resources\\com\\MainApplication\\Controller\\invoice\\RCPT" + cart.generateID() + ".pdf";
-//
-//      Document document = new Document();
-//      PdfWriter.getInstance(document, new FileOutputStream(filePath));
-//      document.open();
-//
-//      PdfPTable table = new PdfPTable(3);
-//      PdfPCell c1 = new PdfPCell(new Phrase("Product Name"));
-//      table.addCell(c1);
-//
-//      c1 = new PdfPCell(new Phrase("Product Price"));
-//      table.addCell(c1);
-//
-//      c1 = new PdfPCell(new Phrase("Product Quantity"));
-//      table.addCell(c1);
-//      table.setHeaderRows(1);
-//
-//      table.addCell(carts.get(i).getProductName());
-//      table.addCell(String.valueOf(carts.get(i).getProductPrice()));
-//      table.addCell(String.valueOf(carts.get(i).getProductQty()));
-//      document.add(table);
-//
-//
-//      document.close();
-//      System.out.println("Done");
+      String filePath = "D:\\OOP_Final_Project\\src\\main\\resources\\com\\MainApplication\\Controller\\invoice\\RCPT" + (cart.generateID()-1) + ".pdf";
+
+      Document document = new Document();
+      PdfWriter.getInstance(document, new FileOutputStream(filePath));
+      document.open();
+
+      Paragraph paragraph = new Paragraph("CASHIER: " + user.getUserName() + "              INVOICE NUMBER:" + (cart.generateID()-1) + "\n\n");
+
+      document.add(paragraph);
+
+      PdfPTable table = new PdfPTable(4);
+      PdfPCell c1 = new PdfPCell(new Phrase("Product Name"));
+      table.addCell(c1);
+
+      c1 = new PdfPCell(new Phrase("Product Price"));
+      table.addCell(c1);
+
+      c1 = new PdfPCell(new Phrase("Product Quantity"));
+      table.addCell(c1);
+
+      c1 = new PdfPCell(new Phrase("Total"));
+      table.addCell(c1);
+
+      table.setHeaderRows(1);
+
+      for (int i = 0; i < carts.size(); i++) {
+        table.addCell(carts.get(i).getProductName());
+        table.addCell(String.valueOf(carts.get(i).getProductPrice()));
+        table.addCell(String.valueOf(carts.get(i).getProductQty()));
+        table.addCell(String.valueOf(carts.get(i).getTotal()));
+      }
+
+      document.add(table);
+
+      Paragraph totalPrice = new Paragraph("Total Price: " + cart.getTotalPrice());
+      document.add(totalPrice);
+
+      document.close();
+
+      Alert finishPDF = new Alert(Alert.AlertType.INFORMATION);
+      finishPDF.setTitle("POS SYSTEM - Group 7");
+      finishPDF.setHeaderText("FINISHED CREATING RECEIPT");
+      finishPDF.showAndWait();
+
+      carts.clear();
+      sceneController.switchSceneButton(event, "product-view.fxml");
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
   }
 
+  public void addProduct(ActionEvent event) throws Exception {
+    Cart tmp = new Cart();
+    tmp = tmp.searchProduct(Integer.parseInt(searchProduct.getText()));
+    if(tmp == null){
+      Alert alert = new Alert(Alert.AlertType.WARNING);
+      alert.setTitle("POS System - Group 7");
+      alert.setHeaderText("Not Found");
+      alert.showAndWait();
+    } else {
+      tmp.setProductQty(1);
+      tempProduct = tempProduct.searchProduct(Integer.parseInt(searchProduct.getText()));
+      tempProduct.setProductQty(tempProduct.getProductQty()-1);
+      tempProduct.updateTempCart(
+        Integer.parseInt(searchProduct.getText()),
+        tempProduct.getProductQty()
+      );
+      setCartProduct(tmp);
+    }
+    sceneController.switchSceneButton(event, "product-view.fxml");
+  }
+
+  public void logoutButton(ActionEvent event) throws IOException, SQLException {
+    manageEmployee.editActive(user.getUserID(), 0);
+    sceneController.switchSceneButton(event, "login-view.fxml");
+  }
+
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     try {
+      userName.setText(user.getUserName());
       itemDisplay();
       cartItem();
     } catch (Exception e) {

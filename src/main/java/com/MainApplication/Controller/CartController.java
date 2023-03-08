@@ -67,6 +67,7 @@ public class CartController {
       alert.showAndWait();
     } else {
       cart.setProductQty(cart.getProductQty()+1);
+      cart.setTotal(cart.getProductQty()*cart.getProductPrice());
       tempProduct.setProductQty(tempProduct.getProductQty()-1);
       productQty.setText(String.valueOf(cart.getProductQty()));
     }
@@ -81,6 +82,7 @@ public class CartController {
       tempProduct.setProductQty(tempProduct.getProductQty()+1);
     } else {
       cart.setProductQty(cart.getProductQty()-1);
+      cart.setTotal(cart.getTotal() - cart.getProductPrice());
       productQty.setText(String.valueOf(cart.getProductQty()+1));
       tempProduct.setProductQty(tempProduct.getProductQty()+1);
     }

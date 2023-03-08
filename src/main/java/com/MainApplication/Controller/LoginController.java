@@ -25,14 +25,12 @@ public class LoginController{
   private Scene scene;
   private Parent root;
   private AnchorPane scenePane;
-  LoginAuthentication loginAuthentication;
+  private LoginAuthentication loginAuthentication;
   private User user;
 
   public User getUser() {
     return user;
   }
-
-
 
   public void LoginBtn(ActionEvent event) throws Exception {
     String email = emailTF.getText();

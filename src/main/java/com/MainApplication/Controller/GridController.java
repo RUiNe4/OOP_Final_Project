@@ -40,6 +40,7 @@ public class GridController {
 
   public void addCart(ActionEvent event) {
     try {
+
       product = new Product();
       product = product.searchProduct(tempProduct.getProductID());
       tempProduct = tempProduct.searchTemp(tempProduct.getProductID());
@@ -48,22 +49,26 @@ public class GridController {
       if (cartProduct == null) {
         throw new Exception("Null Product");
       } else if (tempProduct.getProductQty() == 0) {
-        tempProduct.deleteItem(tempProduct.getProductID());
         sceneController.switchSceneButton(event, "product-view.fxml");
+        tempProduct.deleteItem(tempProduct.getProductID());
       } else {
         tempProduct.setProductQty(tempProduct.getProductQty() - 1);
         if (product.getPqty() - tempProduct.getProductQty() == 1) {
           cartProduct.setProductQty(1); // set cart product to 1
+          cartProduct.setTotal(cartProduct.getProductQty() * cartProduct.getProductPrice());
           cartProduct.addToCart(
             tempProduct.getProductID(),
             cartProduct.getProductName(),
             cartProduct.getProductPrice(),
-            cartProduct.getProductQty()
+            cartProduct.getProductQty(),
+            cartProduct.getTotal(),
+            cartProduct.getTotalPrice()
           );
           ProductController.setCartProduct(cartProduct);
         } else {
           cartProduct = ProductController.getCart();
           cartProduct.setProductQty(ProductController.getCart().getProductQty()+1);
+          cartProduct.setTotal(cartProduct.getProductQty() * cartProduct.getProductPrice());
         }
         tempProduct.updateTempCart(
           tempProduct.getProductID(),

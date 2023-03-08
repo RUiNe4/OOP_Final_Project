@@ -11,4 +11,6 @@
 #loginBtn{
     -fx-background-color: #3f8bf8;
 }
-
+#logout{
+    -fx-background-color: blue;
+}

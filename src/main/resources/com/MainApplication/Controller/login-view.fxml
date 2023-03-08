@@ -7,7 +7,6 @@
    <children>
       <AnchorPane fx:id="loginPanel" layoutX="413.0" layoutY="134.0" prefHeight="500.0" prefWidth="539.0">
          <children>
-
             <Label layoutX="39.0" layoutY="159.0" prefHeight="31.0" prefWidth="178.0" text="E-mail or Username" textFill="WHITE">
                <font>
                   <Font name="Arial" size="18.0" />

@@ -1,5 +1,6 @@
 package com.MainApplication.Controller;
 
+import com.ProductManagement.Cart;
 import com.UserManagement.ManageEmployee;
 import com.UserManagement.User;
 import com.ProductManagement.TempProduct;
@@ -12,6 +13,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Main extends Application {
@@ -28,7 +30,8 @@ public class Main extends Application {
           try {
             ManageEmployee manageEmployee = new ManageEmployee();
             User user = manageEmployee.getUserByActive();
-            manageEmployee.editActive(user.getUserID(),0);
+            manageEmployee.editActive(user.getUserID(), 0);
+
           } catch (Exception e) {
             throw new RuntimeException(e);
           }
@@ -40,6 +43,8 @@ public class Main extends Application {
   }
 
   public static void main(String[] args) throws Exception {
+//    Cart cart = new Cart();
+//    cart.readCartID();
     launch();
     new TempProduct().deleteTempTable();
     System.out.println("[Deleted Temporary Table]");

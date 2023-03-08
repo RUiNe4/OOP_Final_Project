@@ -10,15 +10,22 @@ public class TempProduct extends TemporaryProductQuery {
   private DBConnection con = new DBConnection();
   private Statement statement;
   private PreparedStatement st;
-  private Connection connection;
+  private final Connection connection;
+  private ResultSet resultSet;
   private int productID;
   private String productName;
   private int productQty;
   private double productPrice;
+  private String productType;
   private TempProduct tempProduct;
   private ArrayList<TempProduct> tempProducts = new ArrayList<>();
+
   public void setProductID(int productID) {
     this.productID = productID;
+  }
+
+  public void setProductType(String productType) {
+    this.productType = productType;
   }
 
   public void setProductName(String productName) {
@@ -41,6 +48,10 @@ public class TempProduct extends TemporaryProductQuery {
     return productName;
   }
 
+  public String getProductType() {
+    return productType;
+  }
+
   public int getProductQty() {
     return productQty;
   }
@@ -54,9 +65,10 @@ public class TempProduct extends TemporaryProductQuery {
     this.connection = con.getConnection("jdbc:mysql://localhost:3306/possys", "root", "");
     this.statement = connection.createStatement();
   }
+
   public ArrayList<TempProduct> readFromDB() {
-    try{
-      ResultSet resultSet = statement.executeQuery("select * from temptable");
+    try {
+      resultSet = statement.executeQuery("select * from temptable");
       while (resultSet.next()) {
         tempProduct = new TempProduct();
         tempProduct.setProductID(resultSet.getInt("productID"));
@@ -68,11 +80,16 @@ public class TempProduct extends TemporaryProductQuery {
 
       statement.close();
       resultSet.close();
-    } catch (Exception e){
+    } catch (Exception e) {
       System.out.println(e.getMessage());
     }
     return tempProducts;
   }
+
+//  public ArrayList<TempProduct> readFromDBbyType(String pType) throws Exception {
+//    this.tempProducts = filterDB(pType);
+//    return tempProducts;
+//  }
 
   public void createTable() {
     try {
@@ -97,7 +114,8 @@ public class TempProduct extends TemporaryProductQuery {
       System.out.println(e.getMessage());
     }
   }
-  public TempProduct searchProduct(int pid){
+
+  public TempProduct searchProduct(int pid) {
     try {
       return searchFromProduct(pid);
     } catch (Exception e) {
@@ -105,7 +123,8 @@ public class TempProduct extends TemporaryProductQuery {
     }
     return null;
   }
-  public TempProduct searchTemp(int productId){
+
+  public TempProduct searchTemp(int productId) {
     try {
       return searchFromTemp(productId);
     } catch (Exception e) {
@@ -113,20 +132,23 @@ public class TempProduct extends TemporaryProductQuery {
     }
     return null;
   }
-  public void updateTempCart(int id, int productQty){
+
+  public void updateTempCart(int id, int productQty) {
     try {
       updateQtyQuery(id, productQty);
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
   }
-  public void display(){
+
+  public void display() {
     System.out.println("Product ID: " + productID);
     System.out.println("Product Name: " + productName);
     System.out.println("Product Price: " + productPrice);
     System.out.println("Product Qty: " + productQty);
   }
-  public void deleteItem(int productID){
+
+  public void deleteItem(int productID) {
     try {
       deleteTempItem(productID);
     } catch (Exception e) {
