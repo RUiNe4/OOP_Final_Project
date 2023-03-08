@@ -15,7 +15,27 @@ public class ManageEmployee extends DBConnection {
     connection = con.getConnection("jdbc:mysql://localhost:3306/possys", "root", "");
     this.statement = connection.createStatement();
   }
-
+  public User getUserByActive() throws SQLException {
+    String sql = "SELECT * FROM users WHERE is_active=1";
+    User user = new User();
+    ResultSet resultSet = statement.executeQuery(sql);
+    while (resultSet.next()){
+      user.setUserID(resultSet.getInt("userID"));
+      user.setFirstName(resultSet.getString("firstName"));
+      user.setLastName(resultSet.getString("lastName"));
+      user.setAge(resultSet.getInt("age"));
+      user.setDate(resultSet.getString("dateOfBirth"));
+      user.setEmail(resultSet.getString("email"));
+      user.setPassword(resultSet.getString("password"));
+      user.setPhone(resultSet.getString("phone"));
+      user.setGender(resultSet.getString("gender"));
+      user.setType(resultSet.getString("type"));
+      user.setAddress(resultSet.getString("address"));
+      user.setUserName(resultSet.getString("userName"));
+      user.setIs_active(resultSet.getInt("is_active"));
+    }
+    return user;
+  }
 
   public ObservableList<User> fetchUser(){
   ObservableList <User> userList = FXCollections.observableArrayList();
@@ -86,6 +106,12 @@ public class ManageEmployee extends DBConnection {
     String sql = "UPDATE users set firstName = '" + firstName + "' ,lastName = '" + lastName + "', age = '"
             + age + "',dateOfBirth = '" + date + "',email = '" +email+ "',password = '" + password+ "', phone = '" +telephone+"',gender ='"
             + gender + "',type = '" + types+ "', address = '" +address+ "',userName = '" + userName + "' WHERE userID = '" + ID + "'";
+    PreparedStatement statement = connection.prepareStatement(sql);
+    statement.execute();
+  }
+
+  public void editActive(int ID,int is_active) throws SQLException {
+    String sql = "UPDATE users set is_active = '" + is_active + "' WHERE userID = '" + ID + "'";
     PreparedStatement statement = connection.prepareStatement(sql);
     statement.execute();
   }

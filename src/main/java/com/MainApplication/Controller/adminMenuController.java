@@ -29,7 +29,8 @@ public class adminMenuController implements Initializable{
   private Stage stage;
   private Scene scene;
   private Parent root;
-  private User user;
+  ManageEmployee manageEmployee = new ManageEmployee();
+  private User user = manageEmployee.getUserByActive();
   private Product product;
   PauseTransition pauseTransition = new PauseTransition(Duration.seconds(2));
 
@@ -37,6 +38,9 @@ public class adminMenuController implements Initializable{
   int ageValue;
   ObservableList<User> list;
   ObservableList<Product> plist;
+
+  public adminMenuController() throws Exception {
+  }
 
   @FXML
   @Override
@@ -335,7 +339,7 @@ public class adminMenuController implements Initializable{
     initialize(null,null);
     clearAddProductTextField();
   }
-  public void handleClicks(ActionEvent event) throws IOException {
+  public void handleClicks(ActionEvent event) throws Exception {
     if(event.getSource() == employeeBtnEmp){
       panelEmployee.toFront();
     }else if(event.getSource() == productBtn){
@@ -349,6 +353,7 @@ public class adminMenuController implements Initializable{
       idField.clear();
     }else if(event.getSource() == logoutBtn){
       root = FXMLLoader.load(getClass().getResource("login-view.fxml"));
+      manageEmployee.editActive(user.getUserID(),0);
       stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
       scene = new Scene(root);
       stage.setScene(scene);

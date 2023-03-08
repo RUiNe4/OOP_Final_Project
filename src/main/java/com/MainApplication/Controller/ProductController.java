@@ -2,6 +2,8 @@ package com.MainApplication.Controller;
 
 import com.ProductManagement.Cart;
 import com.ProductManagement.ManageProduct;
+import com.UserManagement.LoginAuthentication;
+import com.UserManagement.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,11 +31,14 @@ public class ProductController extends GridController implements Initializable {
   private GridPane horizonGrid;
   @FXML
   private Label cartStatus;
+
   private SceneController sceneController = new SceneController();
 //  private static boolean confirm = false;
 
   public ProductController() throws Exception {
+
   }
+
 
 
 

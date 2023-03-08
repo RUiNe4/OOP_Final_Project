@@ -2,6 +2,8 @@ package com.MainApplication.Controller;
 
 import com.ProductManagement.Cart;
 import com.ProductManagement.Product;
+import com.UserManagement.LoginAuthentication;
+import com.UserManagement.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -19,6 +21,8 @@ public class GridController {
   @FXML
   private Label productPrice;
   private Product product;
+
+
 
   public GridController() throws Exception {
 

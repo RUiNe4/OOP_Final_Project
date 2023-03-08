@@ -1,6 +1,7 @@
 package com.MainApplication.Controller;
 
 import com.UserManagement.LoginAuthentication;
+import com.UserManagement.ManageEmployee;
 import com.UserManagement.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,7 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class LoginController {
+public class LoginController{
   @FXML
   private TextField emailTF;
   @FXML
@@ -22,13 +23,23 @@ public class LoginController {
   private Parent root;
   private AnchorPane scenePane;
   LoginAuthentication loginAuthentication;
+  private User user;
+
+  public User getUser() {
+    return user;
+  }
+
+
+
   public void LoginBtn(ActionEvent event) throws Exception {
     String email = emailTF.getText();
     String password = passwordField.getText();
+    ManageEmployee manageEmployee = new ManageEmployee();
     try {
       loginAuthentication = new LoginAuthentication();
       if (loginAuthentication.authentication(email,password)){
-        User user = loginAuthentication.getUser();
+        user = loginAuthentication.getUser();
+        manageEmployee.editActive(user.getUserID(),1);
         if(user.getType().equals("Admin") || user.getType().equals("admin")){
           System.out.println("Logged in as Admin");
           root = FXMLLoader.load(getClass().getResource("adminMenu.fxml"));
