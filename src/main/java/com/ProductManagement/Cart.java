@@ -2,8 +2,6 @@ package com.ProductManagement;
 
 import com.DatabaseFunction.DBConnection;
 import com.DatabaseFunction.QueryCart;
-import com.DatabaseFunction.QueryProduct;
-import com.DatabaseFunction.TemporaryQuery;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -13,15 +11,12 @@ public class Cart extends QueryCart {
   private String productName;
   private float productPrice;
   private int productQty;
-  private int totalPrice;
   private int cartID;
-  private boolean seen;
   private final ArrayList<Cart> cartProducts = new ArrayList<>();
   private DBConnection con = new DBConnection();
   private Statement statement;
   private PreparedStatement st;
   private Connection connection;
-  private Cart cart;
   public Cart() throws Exception {
     super("jdbc:mysql://localhost:3306/possys", "root", "");
     this.connection = con.getConnection("jdbc:mysql://localhost:3306/possys", "root", "");
@@ -31,10 +26,6 @@ public class Cart extends QueryCart {
   // setter
   public void setProductName(String productName) {
     this.productName = productName;
-  }
-
-  public void setSeen(boolean seen) {
-    this.seen = seen;
   }
 
   public void setProductPrice(float productPrice) {
@@ -54,11 +45,6 @@ public class Cart extends QueryCart {
   }
 
   // getter
-
-  public boolean isSeen() {
-    return seen;
-  }
-
   public int getProductID() {return productID;}
 
   public String getProductName() {
@@ -92,11 +78,13 @@ public class Cart extends QueryCart {
     return cartProducts;
   }
 
-  public int getID() throws Exception {
+  public int generateID() throws Exception {
     if(readCartDB().isEmpty()){
       return 10000;
     } else {
-      int tmpID = readCartDB().get(readCartDB().size()-1).getCartID();
+      System.out.println("[From Cart]");
+      int tmpID = cartProducts.get(readCartDB().size()-1).getCartID();
+      System.out.println(tmpID);
       return tmpID + 1;
     }
   }
@@ -104,7 +92,7 @@ public class Cart extends QueryCart {
   public void saveToDb(ArrayList<Cart> cart) throws Exception {
     String insertStm = "insert into cartProducts (cartID, productID, productName, productPrice, productQty, subPrice) values (?, ?, ?, ?, ?, ?)";
     this.st = connection.prepareStatement(insertStm);
-    int newID = getID();
+    int newID = generateID();
     for (int i = 0; i < cart.size(); i++) {
       cart.get(i).setCartID(newID);
       st.setInt(1, cart.get(i).getCartID());
@@ -115,6 +103,7 @@ public class Cart extends QueryCart {
       st.setFloat(6, cart.get(i).getProductQty()*cart.get(i).getProductPrice());
       st.executeUpdate();
     }
+    st.close();
   }
 
   public void addToCart(int productID, String productName, float productPrice, int productQty) {
@@ -122,16 +111,6 @@ public class Cart extends QueryCart {
     setProductName(productName);
     setProductPrice(productPrice);
     setProductQty(productQty);
-  }
-
-  public void displayCartProducts(ArrayList<Cart> cartProductst) {
-    for (int i = 0; i < cartProducts.size(); i++) {
-      System.out.println("Product ID: " + cartProducts.get(i).productID);
-      System.out.println("Product name: " + cartProducts.get(i).productName);
-      System.out.println("Product Price: " + cartProducts.get(i).productPrice);
-      System.out.println("Product Quantity: " + cartProducts.get(i).productQty);
-      System.out.println();
-    }
   }
 
   public void displayItem() {

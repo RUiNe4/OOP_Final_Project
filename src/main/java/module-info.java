@@ -2,6 +2,9 @@ module com.MainApplication {
   requires javafx.controls;
   requires javafx.fxml;
   requires java.sql;
+  requires itextpdf;
+  requires image4j;
+  requires PDFRenderer;
 
   exports com.MainApplication.Controller;
   opens com.MainApplication.Controller to javafx.fxml;

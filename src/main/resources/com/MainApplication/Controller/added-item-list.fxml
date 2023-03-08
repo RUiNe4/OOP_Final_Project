@@ -3,87 +3,105 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="67.0" prefWidth="412.0" style="-fx-border-color: black;" stylesheets="@Style/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.MainApplication.Controller.CartController">
+<AnchorPane id="gridBox" prefHeight="64.0" prefWidth="536.0" stylesheets="@Style/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.MainApplication.Controller.CartController">
    <children>
-      <HBox prefHeight="67.0" prefWidth="444.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#09569e" height="64.0" stroke="#09569e" strokeType="INSIDE" width="11.0" />
+      <HBox alignment="CENTER_LEFT" fillHeight="false" layoutX="5.0" prefHeight="63.0" prefWidth="541.0">
          <children>
-            <VBox alignment="CENTER" prefHeight="67.0" prefWidth="88.0">
+            <VBox alignment="CENTER" prefHeight="72.0" prefWidth="185.0">
                <children>
-                  <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true">
-                     <image>
-                        <Image url="@images/photo_2022-08-27_20-03-20.jpg" />
-                     </image>
-                  </ImageView>
-               </children>
-            </VBox>
-            <HBox prefHeight="67.0" prefWidth="358.0">
-               <children>
-                  <VBox prefHeight="67.0" prefWidth="158.0">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="173.0">
                      <children>
-                        <Label fx:id="productName" prefHeight="30.0" prefWidth="99.0" text="Product Name">
+                        <Label fx:id="productName" text="Product Name" HBox.hgrow="ALWAYS">
                            <font>
-                              <Font name="System Bold" size="14.0" />
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="productID" text="ProductId" textFill="#686352" HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font size="13.0" />
                            </font>
                         </Label>
-                        <HBox alignment="CENTER_LEFT" prefHeight="34.0" prefWidth="158.0">
-                           <children>
-                              <Label fx:id="prodExDate" prefHeight="25.0" prefWidth="48.0" text="Price: " underline="true">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="productPrice" text="0.0" textFill="#eb6666">
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
                      </children>
-                  </VBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="67.0" prefWidth="260.0">
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="34.0" prefWidth="158.0">
                      <children>
-                        <HBox alignment="CENTER_LEFT" prefHeight="67.0" prefWidth="108.0">
-                           <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#decrease" prefHeight="26.0" prefWidth="33.0" text="-">
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="Calibri Bold" size="20.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="productQty" alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="33.0" text="0">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font></Label>
-                              <Label alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#increase" prefHeight="26.0" prefWidth="33.0" text="+">
-                                 <font>
-                                    <Font name="Calibri Bold" size="20.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <Label fx:id="subTotalPrice" text="\$0.0">
+                        <Label fx:id="prodExDate" contentDisplay="CENTER" text="Price: " underline="true">
                            <font>
-                              <Font name="System Bold" size="12.0" />
+                              <Font name="Calibri Italic" size="16.0" />
                            </font>
                            <HBox.margin>
                               <Insets right="10.0" />
                            </HBox.margin>
                         </Label>
-                        <Button id="deleteBtn" mnemonicParsing="false" onAction="#removeButton" text="remove" />
+                        <Label fx:id="productPrice" text="xxx" textFill="#ee6d45">
+                           <font>
+                              <Font name="System Bold Italic" size="19.0" />
+                           </font>
+                        </Label>
                      </children>
                   </HBox>
                </children>
+            </VBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="67.0" prefWidth="260.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="72.0" prefWidth="146.0">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#decrease" text="-" textFill="#ff2c2c">
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Calibri Light Italic" size="40.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="productQty" alignment="CENTER" contentDisplay="CENTER" text="0" textFill="#797777">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#increase" text="+" textFill="#45c363">
+                           <font>
+                              <Font name="Calibri Bold" size="40.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Label fx:id="subTotalPrice" alignment="CENTER" contentDisplay="CENTER" prefHeight="29.0" prefWidth="67.0" text="\$0.0" textFill="#2bbc32">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
             </HBox>
+            <Button id="deleteBtn" mnemonicParsing="false" onAction="#removeButton" prefHeight="63.0" prefWidth="97.0">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <graphic>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="remove">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Text>
+               </graphic>
+            </Button>
          </children>
       </HBox>
    </children>

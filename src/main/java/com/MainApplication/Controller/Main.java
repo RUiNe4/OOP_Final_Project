@@ -2,6 +2,7 @@ package com.MainApplication.Controller;
 
 import com.UserManagement.ManageEmployee;
 import com.UserManagement.User;
+import com.ProductManagement.TempProduct;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -40,5 +41,7 @@ public class Main extends Application {
 
   public static void main(String[] args) throws Exception {
     launch();
+    new TempProduct().deleteTempTable();
+    System.out.println("[Deleted Temporary Table]");
   }
 }

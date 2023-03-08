@@ -1,5 +1,5 @@
 package com.Others;
-import com.DatabaseFunction.*;
+
 import java.util.Scanner;
 
 public class GeneralFunction {

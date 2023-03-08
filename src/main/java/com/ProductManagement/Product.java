@@ -1,13 +1,14 @@
 package com.ProductManagement;
 
-import com.DatabaseFunction.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-//import DatabaseFunction.QueryFunction;
-import java.sql.*;
+import com.DatabaseFunction.DBConnection;
+import com.DatabaseFunction.QueryProduct;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
-public class Product extends QueryProduct{
+public class Product extends QueryProduct {
   private int pid;
   private String pname;
   private int pqty;
@@ -21,13 +22,11 @@ public class Product extends QueryProduct{
   public void setPtype(String ptype) {
     this.ptype = ptype;
   }
-
   private Product product;
   private Statement statement;
   private DBConnection con = new DBConnection();
   private ArrayList<Product> products = new ArrayList<>();
   private Connection connection;
-
 
   public int getPid() {
     return pid;
@@ -166,4 +165,5 @@ public class Product extends QueryProduct{
     }
     return null;
   }
+
 }

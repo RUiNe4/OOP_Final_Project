@@ -21,9 +21,9 @@
       <list>
         <option value="Kotlin Class" />
         <option value="CSS File" />
-        <option value="Interface" />
         <option value="FxmlFile" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -137,9 +137,14 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="itext-xtra-5.1.0.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/itext-xtra-5.1.0.jar" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="JAR Application.itext-xtra-5.1.0.jar" />
         <item itemvalue="Application.Mian" />
         <item itemvalue="Application.ProductController" />
         <item itemvalue="Application.GridController" />

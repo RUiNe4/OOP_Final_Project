@@ -1,10 +1,10 @@
 package com.MainApplication.Controller;
 
 import com.ProductManagement.ManageProduct;
-import com.UserManagement.User;
-import com.UserManagement.ManageEmployee;
 import com.ProductManagement.Product;
 import javafx.animation.PauseTransition;
+import com.UserManagement.ManageEmployee;
+import com.UserManagement.User;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
