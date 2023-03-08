@@ -13,6 +13,14 @@ public class User {
   private String type; //admin or employee
   private String address;
   private String userName;
+  private int is_active;
+
+  public void setIs_active(int is_active) {
+    this.is_active = is_active;
+  }
+  public int getIs_active(){
+    return is_active;
+  }
 
   public void setUserID(int userID) {
     this.userID = userID;

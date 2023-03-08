@@ -2,6 +2,7 @@ package com.MainApplication.Controller;
 
 import com.ProductManagement.ManageProduct;
 import com.ProductManagement.Product;
+import javafx.animation.PauseTransition;
 import com.UserManagement.ManageEmployee;
 import com.UserManagement.User;
 import javafx.collections.ObservableList;
@@ -16,7 +17,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -26,64 +29,18 @@ public class adminMenuController implements Initializable{
   private Stage stage;
   private Scene scene;
   private Parent root;
+  ManageEmployee manageEmployee = new ManageEmployee();
+  private User user = manageEmployee.getUserByActive();
+  private Product product;
+  PauseTransition pauseTransition = new PauseTransition(Duration.seconds(2));
 
   //from age Spinner
   int ageValue;
-  @FXML
-  private TableView<User> table;
-  @FXML
-  private TableColumn<User, String> address;
-
-  @FXML
-  private TableColumn<User, Integer> age;
-
-  @FXML
-  private TableColumn<User, String> date;
-
-  @FXML
-  private TableColumn<User, String> email;
-
-  @FXML
-  private TableColumn<User, String> firstName;
-
-  @FXML
-  private TableColumn<User, String> gender;
-
-  @FXML
-  private TableColumn<User, Integer> id;
-
-  @FXML
-  private TableColumn<User, String> lastName;
-
-  @FXML
-  private TableColumn<User, String> password;
-
-  @FXML
-  private TableColumn<User, String> phone;
-
-  @FXML
-  private TableColumn<User, String> type;
-
-  @FXML
-  private TableColumn<User, String> userName;
-  @FXML
-  private TextField searchFilter;
-
-  @FXML
-  private Spinner<Integer> ageSpinner;
-
-  private User user;
-
-
-  @FXML private TableView<Product> pTable;
-  @FXML private TableColumn<Product,Integer> pID;
-  @FXML private TableColumn<Product,String> pName;
-  @FXML private TableColumn<Product,Double> pPrice;
-  @FXML private TableColumn<Product,Integer> pQty;
-
   ObservableList<User> list;
   ObservableList<Product> plist;
 
+  public adminMenuController() throws Exception {
+  }
 
   @FXML
   @Override
@@ -110,6 +67,7 @@ public class adminMenuController implements Initializable{
     pName.setCellValueFactory(new PropertyValueFactory<Product, String>("pname"));
     pPrice.setCellValueFactory(new PropertyValueFactory<Product, Double>("pprice"));
     pQty.setCellValueFactory(new PropertyValueFactory<Product, Integer>("pqty"));
+    pType.setCellValueFactory(new PropertyValueFactory<Product, String>("ptype"));
 
     ManageEmployee manageEmployee = null;
     try {
@@ -130,7 +88,7 @@ public class adminMenuController implements Initializable{
 
     //search Filter for user table
     FilteredList<User> filterUserList = new FilteredList<>(list, b -> true);
-//    FilteredList<Product> filteredProductList = new FilteredList<>(plist, b -> true);
+    FilteredList<Product> filteredProductList = new FilteredList<>(plist, b -> true);
     searchFilter.textProperty().addListener((observable, oldValue, newValue) -> {
       filterUserList.setPredicate(user -> {
         if (newValue == null || newValue.isEmpty()) {
@@ -143,60 +101,21 @@ public class adminMenuController implements Initializable{
           return false;
       });
     });
+    searchFilterProduct.textProperty().addListener((observable,oldValue,newValue) ->{
+      filteredProductList.setPredicate(product -> {
+        if (newValue == null || newValue.isEmpty()) {
+          return true;
+        }
+        String lowercasefilter = newValue.toLowerCase();
+        if (product.getPname().toLowerCase().indexOf(lowercasefilter) != -1) {
+          return true;
+        } else
+          return false;
+      });
+    });
     table.setItems(filterUserList);
+    pTable.setItems(filteredProductList);
   }
-  @FXML
-  private Button employeeBtn;
-
-  @FXML
-  private Button updateBtn;
-
-  @FXML
-  private Button logoutBtn;
-
-  @FXML
-  private Button productBtn;
-
-  @FXML
-  private Button salesBtn;
-
-  @FXML
-  private Button settingBtn;
-  @FXML
-  private AnchorPane panelEmployee;
-
-  @FXML
-  private AnchorPane panelProduct;
-
-  @FXML
-  private AnchorPane panelSales;
-  @FXML
-  private AnchorPane updatePanel;
-
-  @FXML
-  private AnchorPane panelSetting;
-  @FXML
-  private TextField addressField;
-  @FXML
-  private TextField emailField;
-  @FXML
-  private TextField firstnameField;
-
-  @FXML
-  private TextField lastnameField;
-
-  @FXML
-  private TextField telephoneField;
-  @FXML
-  private TextField dateField;
-  @FXML
-  private TextField usernameField;
-  @FXML
-  private TextField idTextField;
-  @FXML
-  private RadioButton genderRB_M,genderRB_F;
-
-
   public void clearTextField(){
     firstnameField.clear();
     lastnameField.clear();
@@ -205,6 +124,13 @@ public class adminMenuController implements Initializable{
     telephoneField.clear();
     emailField.clear();
     usernameField.clear();
+  }
+
+  public void clearAddProductTextField(){
+    productNameTextField.clear();
+    priceTextField.clear();
+    productTypeTextField.clear();
+    quantityTextField.clear();
   }
 
   public void clearUpdateField(){
@@ -222,29 +148,12 @@ public class adminMenuController implements Initializable{
     ageField_Upd.clear();
   }
 
-  @FXML
-  private TextField ageField_Upd;
-  @FXML
-  private TextField dobField_Upd;
-  @FXML
-  private TextField emailField_Upd;
-  @FXML
-  private TextField firstnameField_Upd;
-  @FXML
-  private TextField genderField_Upd;
-  @FXML
-  private TextField idField;
-  @FXML
-  private TextField lastnameField_Upd;
-  @FXML
-  private TextField passField_Upd;
-  @FXML
-  private TextField phoneField_Upd;
-  @FXML
-  private TextField typeField_Upd;
-  @FXML
-  private TextField usernameField_Upd;
-  @FXML private TextField addressField_Upd;
+  public void clearModifyProductField(){
+    pNameEditField.clear();
+    pTypeEditField.clear();
+    pPriceEditField.clear();
+    pQtyEditField.clear();
+  }
 
   int index = -1;
 
@@ -265,7 +174,76 @@ public class adminMenuController implements Initializable{
         typeField_Upd.setText(user.getType());
         addressField_Upd.setText(user.getAddress());
         usernameField_Upd.setText(user.getUserName());
+        updatePanel.toFront();
+      }else{
+        updateWarningLabel.setText("User not found");
+        idField.clear();
+        pauseTransition.setOnFinished(event1 -> updateWarningLabel.setText(null));
+        pauseTransition.play();
       }
+    }catch (Exception e){
+      System.out.println(e.getMessage());
+    }
+  }
+
+  public void findProduct(ActionEvent event){
+    try {
+      ManageProduct manageProduct = new ManageProduct();
+      if(manageProduct.checkID(Integer.parseInt(idProductField.getText()))){
+        product = manageProduct.getProduct(Integer.parseInt(idProductField.getText()));
+        pNameEditField.setText(product.getPname());
+        pQtyEditField.setText(String.valueOf(product.getPqty()));
+        pPriceEditField.setText(String.valueOf(product.getPprice()));
+        pTypeEditField.setText(product.getPtype());
+      }else{
+        modifyLabel.setText("Product not found");
+        modifyLabel.setTextFill(Color.RED);
+        idProductField.clear();
+        pauseTransition.setOnFinished(event1 -> modifyLabel.setText(null));
+        pauseTransition.play();
+      }
+    }catch (Exception e){
+      System.out.println(e.getMessage());
+    }
+  }
+  public void editProductBtn(ActionEvent event){
+    try {
+      Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+      alert.setTitle("Warning");
+      alert.setHeaderText("Update product with ID = " + product.getPid());
+      alert.setContentText("Do you want to continue?");
+      if(alert.showAndWait().get() == ButtonType.OK){
+        ManageProduct manageProduct = new ManageProduct();
+        manageProduct.editProduct(pNameEditField.getText(),Integer.parseInt(pQtyEditField.getText()),Double.parseDouble(pPriceEditField.getText()),
+                pTypeEditField.getText(),product.getPid());
+        clearModifyProductField();
+        initialize(null,null);
+        idProductField.clear();
+      }else{
+        idProductField.clear();
+        clearModifyProductField();
+      }
+    }catch (Exception e){
+      System.out.println(e.getMessage());
+    }
+  }
+  public void removeProductBtn(ActionEvent event){
+    try {
+      ManageProduct manageProduct = new ManageProduct();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Warning");
+        alert.setHeaderText("Delete product with ID = " + product.getPid());
+        alert.setContentText("Do you want to continue?");
+        if (alert.showAndWait().get() == ButtonType.OK) {
+          manageProduct.deleteProduct(product.getPid());
+          System.out.println("Successfully deleted");
+          initialize(null, null);
+          idProductField.clear();
+          clearModifyProductField();
+        } else {
+          idProductField.clear();
+          clearModifyProductField();
+        }
     }catch (Exception e){
       System.out.println(e.getMessage());
     }
@@ -273,13 +251,22 @@ public class adminMenuController implements Initializable{
 
   public void editBtn(ActionEvent event){
     try {
-      ManageEmployee manageEmployee = new ManageEmployee();
-      manageEmployee.editEmployee(firstnameField_Upd.getText(),lastnameField_Upd.getText(),Integer.parseInt(ageField_Upd.getText()),
-              dobField_Upd.getText(),addressField_Upd.getText(),phoneField_Upd.getText(),emailField_Upd.getText(),passField_Upd.getText(),usernameField_Upd.getText(),
-              typeField_Upd.getText(),genderField_Upd.getText(),Integer.parseInt(idField.getText()));
-      clearUpdateField();
-      initialize(null,null);
-      panelEmployee.toFront();
+      Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+      alert.setTitle("Warning");
+      alert.setHeaderText("Update user with ID = " + idField.getText());
+      alert.setContentText("Do you want to continue?");
+      if(alert.showAndWait().get() == ButtonType.OK){
+        ManageEmployee manageEmployee = new ManageEmployee();
+        manageEmployee.editEmployee(firstnameField_Upd.getText(),lastnameField_Upd.getText(),Integer.parseInt(ageField_Upd.getText()),
+                dobField_Upd.getText(),addressField_Upd.getText(),phoneField_Upd.getText(),emailField_Upd.getText(),passField_Upd.getText(),usernameField_Upd.getText(),
+                typeField_Upd.getText(),genderField_Upd.getText(),Integer.parseInt(idField.getText()));
+        clearUpdateField();
+        initialize(null,null);
+        idField.clear();
+        panelEmployee.toFront();
+      }else{
+        idTextField.clear();
+      }
     }catch (Exception e){
       System.out.println(e.getMessage());
     }
@@ -289,11 +276,24 @@ public class adminMenuController implements Initializable{
     try {
       ManageEmployee manageEmployee = new ManageEmployee();
       if(manageEmployee.checkID(Integer.parseInt(idTextField.getText()))){
-        manageEmployee.deleteEmployee(Integer.parseInt(idTextField.getText()));
-        System.out.println("Can delete");
-        initialize(null,null);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Warning");
+        alert.setHeaderText("Delete user with ID = " + idTextField.getText());
+        alert.setContentText("Do you want to continue?");
+        if(alert.showAndWait().get() == ButtonType.OK){
+          manageEmployee.deleteEmployee(Integer.parseInt(idTextField.getText()));
+          System.out.println("Successfully deleted");
+          initialize(null,null);
+          idTextField.clear();
+        }else{
+          idTextField.clear();
+        }
       }else{
         System.out.println("Cannot delete");
+        removeWarningLabel.setText("User not found!");
+        idTextField.clear();
+        pauseTransition.play();
+        pauseTransition.setOnFinished(event1 -> removeWarningLabel.setText(null));
       }
     }catch (Exception e){
       System.out.println(e.getMessage());
@@ -319,11 +319,28 @@ public class adminMenuController implements Initializable{
     }
     manageEmployee.insertEmployee(user.getFirstName(),user.getLastName(),user.getAge(),user.getDate(),user.getAddress(),user.getPhone(),user.getEmail()
             ,user.getPassword(),user.getUserName(),user.getType(),user.getGender());
+    addEmployeeSuccess.setText("Successfully added a new user!");
+    pauseTransition.setOnFinished(event1 -> addEmployeeSuccess.setText(null));
+    pauseTransition.play();
     initialize(null,null);
     clearTextField();
   }
-  public void handleClicks(ActionEvent event) throws IOException {
-    if(event.getSource() == employeeBtn){
+  public void addProduct(ActionEvent event) throws Exception{
+    ManageProduct manageProduct = new ManageProduct();
+    Product product = new Product();
+    product.setPname(productNameTextField.getText());
+    product.setPprice(Double.parseDouble(priceTextField.getText()));
+    product.setPqty(Integer.parseInt(quantityTextField.getText()));
+    product.setPtype(productTypeTextField.getText());
+    manageProduct.insertProduct(product.getPname(),product.getPprice(),product.getPqty(),product.getPtype());
+    addProductSuccess.setText("Successfully added a new product!");
+    pauseTransition.setOnFinished(event1 -> addProductSuccess.setText(null));
+    pauseTransition.play();
+    initialize(null,null);
+    clearAddProductTextField();
+  }
+  public void handleClicks(ActionEvent event) throws Exception {
+    if(event.getSource() == employeeBtnEmp){
       panelEmployee.toFront();
     }else if(event.getSource() == productBtn){
       panelProduct.toFront();
@@ -331,14 +348,98 @@ public class adminMenuController implements Initializable{
       panelSales.toFront();
     }else if(event.getSource() == settingBtn) {
       panelSetting.toFront();
-    }else if(event.getSource() == updateBtn){
-      updatePanel.toFront();
+    }else if(event.getSource() == backBtn_UpdEmp){
+      panelEmployee.toFront();
+      idField.clear();
     }else if(event.getSource() == logoutBtn){
       root = FXMLLoader.load(getClass().getResource("login-view.fxml"));
+      manageEmployee.editActive(user.getUserID(),0);
       stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
       scene = new Scene(root);
       stage.setScene(scene);
       stage.show();
     }
   }
+
+
+
+  //Buttons
+  @FXML private Button employeeBtnEmp;
+  @FXML private Button updateBtnEmp;
+  @FXML Button backBtn_UpdEmp;
+  @FXML private Button logoutBtn;
+  @FXML private Button productBtn;
+  @FXML private Button salesBtn;
+  @FXML private Button settingBtn;
+
+  //Anchor Pane
+  @FXML private AnchorPane panelEmployee;
+  @FXML private AnchorPane panelProduct;
+  @FXML private AnchorPane panelSales;
+  @FXML private AnchorPane updatePanel;
+  @FXML private AnchorPane panelSetting;
+
+  @FXML private Label removeWarningLabel;
+  @FXML private Label modifyLabel;
+  @FXML private Label updateWarningLabel;
+  @FXML private Label addEmployeeSuccess;
+  @FXML private Label addProductSuccess;
+
+  //Add Field
+  @FXML private TextField pNameEditField;
+  @FXML private TextField pTypeEditField;
+  @FXML private TextField pQtyEditField;
+  @FXML private TextField pPriceEditField;
+  @FXML private TextField idProductField;
+  @FXML private TextField searchFilterProduct;
+  @FXML private TextField productNameTextField;
+  @FXML private TextField quantityTextField;
+  @FXML private TextField priceTextField;
+  @FXML private TextField productTypeTextField;
+  @FXML private TextField addressField;
+  @FXML private TextField emailField;
+  @FXML private TextField firstnameField;
+  @FXML private TextField lastnameField;
+  @FXML private TextField telephoneField;
+  @FXML private TextField dateField;
+  @FXML private TextField usernameField;
+  @FXML private TextField idTextField;
+  @FXML private RadioButton genderRB_M,genderRB_F;
+
+  //Update Field
+  @FXML private TextField ageField_Upd;
+  @FXML private TextField dobField_Upd;
+  @FXML private TextField emailField_Upd;
+  @FXML private TextField firstnameField_Upd;
+  @FXML private TextField genderField_Upd;
+  @FXML private TextField idField;
+  @FXML private TextField lastnameField_Upd;
+  @FXML private TextField passField_Upd;
+  @FXML private TextField phoneField_Upd;
+  @FXML private TextField typeField_Upd;
+  @FXML private TextField usernameField_Upd;
+  @FXML private TextField addressField_Upd;
+  //User Table Component
+  @FXML private TableView<User> table;
+  @FXML private TableColumn<User, String> address;
+  @FXML private TableColumn<User, Integer> age;
+  @FXML private TableColumn<User, String> date;
+  @FXML private TableColumn<User, String> email;
+  @FXML private TableColumn<User, String> firstName;
+  @FXML private TableColumn<User, String> gender;
+  @FXML private TableColumn<User, Integer> id;
+  @FXML private TableColumn<User, String> lastName;
+  @FXML private TableColumn<User, String> password;
+  @FXML private TableColumn<User, String> phone;
+  @FXML private TableColumn<User, String> type;
+  @FXML private TableColumn<User, String> userName;
+  @FXML private TextField searchFilter;
+  @FXML private Spinner<Integer> ageSpinner;
+  //Product Table Component
+  @FXML private TableView<Product> pTable;
+  @FXML private TableColumn<Product,Integer> pID;
+  @FXML private TableColumn<Product,String> pName;
+  @FXML private TableColumn<Product,Double> pPrice;
+  @FXML private TableColumn<Product,Integer> pQty;
+  @FXML private TableColumn<Product,String> pType;
 }

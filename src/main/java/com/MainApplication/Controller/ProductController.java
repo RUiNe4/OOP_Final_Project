@@ -1,6 +1,10 @@
 package com.MainApplication.Controller;
 
 import com.ProductManagement.Cart;
+import com.ProductManagement.ManageProduct;
+import com.UserManagement.LoginAuthentication;
+import com.UserManagement.ManageEmployee;
+import com.UserManagement.User;
 import com.ProductManagement.Product;
 import com.ProductManagement.TempProduct;
 import com.itextpdf.text.Document;
@@ -37,11 +41,17 @@ public class ProductController extends GridController implements Initializable {
   private GridPane horizonGrid;
   @FXML
   private Label cartStatus;
+
+  ManageEmployee manageEmployee = new ManageEmployee();
+  private User user = manageEmployee.getUserByActive();
+
   private SceneController sceneController = new SceneController();
   private final static ArrayList<Cart> carts = new ArrayList<>();
 
   public ProductController() throws Exception {
+    System.out.println(user.getUserID());
   }
+
 
   private static ArrayList<TempProduct> tempProducts = new ArrayList<>();
 
