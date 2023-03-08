@@ -13,10 +13,20 @@ public class Product extends QueryProduct {
   private String pname;
   private int pqty;
   private Double pprice;
+  private String ptype;
+
+  public String getPtype() {
+    return ptype;
+  }
+
+  public void setPtype(String ptype) {
+    this.ptype = ptype;
+  }
   private Product product;
   private Statement statement;
   private DBConnection con = new DBConnection();
   private ArrayList<Product> products = new ArrayList<>();
+  private Connection connection;
 
   public int getPid() {
     return pid;
@@ -64,10 +74,32 @@ public class Product extends QueryProduct {
       ResultSet resultSet = statement.executeQuery("select * from products");
       while (resultSet.next()) {
         product = new Product();
-        product.setPid(resultSet.getInt("pId"));
+        product.setPid(resultSet.getInt("pID"));
         product.setPname(resultSet.getString("pName"));
         product.setPprice(resultSet.getDouble("pPrice"));
         product.setPqty(resultSet.getInt("pQty"));
+        product.setPtype(resultSet.getString("pType"));
+        products.add(product);
+      }
+    } catch (Exception e){
+      System.out.println(e.getMessage());
+    }
+    return products;
+  }
+
+  public ArrayList<Product> readFromDBbyType(String pType){
+    try{
+      String sql = "SELECT * FROM products WHERE pType=?";
+      PreparedStatement statement = connection.prepareStatement(sql);
+      statement.setString(1, pType);
+      ResultSet resultSet = statement.executeQuery();
+      while (resultSet.next()) {
+        product = new Product();
+        product.setPid(resultSet.getInt("pID"));
+        product.setPname(resultSet.getString("pName"));
+        product.setPprice(resultSet.getDouble("pPrice"));
+        product.setPqty(resultSet.getInt("pQty"));
+        product.setPtype(resultSet.getString("pType"));
         products.add(product);
       }
     } catch (Exception e){
@@ -92,14 +124,15 @@ public class Product extends QueryProduct {
     }
   }
 
-  public void setProduct(String pName, double pPrice, int pQty) {
+  public void setProduct(String pName, double pPrice, int pQty,String pType) {
     setPname(pName);
     setPprice(pPrice);
     setPqty(pQty);
+    setPtype(pType);
   }
 
-  public void addProduct(String pName, double pPrice, int pQty) {
-    setProduct(pName, pPrice, pQty);
+  public void addProduct(String pName, double pPrice, int pQty,String pType) {
+    setProduct(pName, pPrice, pQty,pType);
     try {
       addQuery(pName, pPrice, pQty);
     } catch (Exception e) {

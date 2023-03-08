@@ -2,6 +2,8 @@ package com.MainApplication.Controller;
 
 import com.ProductManagement.Cart;
 import com.ProductManagement.Product;
+import com.UserManagement.LoginAuthentication;
+import com.UserManagement.User;
 import com.ProductManagement.TempProduct;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,6 +23,7 @@ public class GridController {
   private Label productPrice;
   private TempProduct tempProduct;
   private Product product;
+
   public GridController() throws Exception {
   }
 
