@@ -3,6 +3,7 @@ package com.MainApplication.Controller;
 import com.ProductManagement.Cart;
 import com.ProductManagement.ManageProduct;
 import com.UserManagement.LoginAuthentication;
+import com.UserManagement.ManageEmployee;
 import com.UserManagement.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -32,11 +33,14 @@ public class ProductController extends GridController implements Initializable {
   @FXML
   private Label cartStatus;
 
+  ManageEmployee manageEmployee = new ManageEmployee();
+  private User user = manageEmployee.getUserByActive();
+
   private SceneController sceneController = new SceneController();
 //  private static boolean confirm = false;
 
   public ProductController() throws Exception {
-
+    System.out.println(user.getUserID());
   }
 
 
