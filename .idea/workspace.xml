@@ -4,23 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bf7a8ab0-e9b7-4e5e-881c-17b58dac5dc5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/DatabaseFunction/TemporaryQuery.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/CartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/CartController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/GridController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/GridController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MainApplication/Controller/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ProductManagement/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ProductManagement/Cart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ProductManagement/TempCart.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/Style/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/Style/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/added-item-list.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/added-item-list.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/invoice/10000.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/invoice/10001.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/invoice/pdfTest.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/item-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/item-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/product-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/MainApplication/Controller/product-view.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="d9c97c3b-1c9b-4612-aca5-6721b71c79d8" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
