@@ -1,6 +1,7 @@
 package com.DatabaseFunction;
 
 import com.ProductManagement.Product;
+import org.w3c.dom.ls.LSResourceResolver;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,6 +29,9 @@ public class QueryProduct extends DBConnection {
       System.out.println("Product Quantity: " + resultSet.getInt("pQty"));
       System.out.println();
     }
+
+    statement.close();
+    resultSet.close();
   }
 
   protected void addQuery(String pName, double pPrice, int pQty) throws Exception {
@@ -37,6 +41,8 @@ public class QueryProduct extends DBConnection {
     st.setDouble(2, pPrice);
     st.setInt(3, pQty);
     st.executeUpdate();
+
+    st.close();
   }
 
   protected void updateQtyQuery(int id, int productQty) throws Exception {
@@ -45,6 +51,8 @@ public class QueryProduct extends DBConnection {
     st.setInt(1, productQty);
     st.setInt(2, id);
     st.executeUpdate();
+
+    st.close();
   }
 
   protected Product searchItem(int pid) throws Exception {
@@ -58,6 +66,9 @@ public class QueryProduct extends DBConnection {
       item.setPname(resultSet.getString("pName"));
       item.setPprice(resultSet.getDouble("pPrice"));
       item.setPqty(resultSet.getInt("pQty"));
+
+      st.close();
+      resultSet.close();
       return item;
     } else {
       return null;
@@ -69,6 +80,8 @@ public class QueryProduct extends DBConnection {
     st = connection.prepareStatement(deleteStm);
     st.setInt(1, pid);
     st.executeUpdate();
+
+    st.close();
   }
 
 }

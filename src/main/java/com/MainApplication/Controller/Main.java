@@ -1,5 +1,8 @@
 package com.MainApplication.Controller;
 
+import com.Others.GeneralFunction;
+import com.ProductManagement.Product;
+import com.ProductManagement.TempCart;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -28,7 +31,8 @@ public class Main extends Application {
   }
 
   public static void main(String[] args) throws Exception {
-
     launch();
+    new TempCart().deleteTempTable();
+    System.out.println("deleted temp db");
   }
 }

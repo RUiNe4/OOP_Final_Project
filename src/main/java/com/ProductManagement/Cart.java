@@ -11,15 +11,12 @@ public class Cart extends QueryCart {
   private String productName;
   private float productPrice;
   private int productQty;
-  private int totalPrice;
   private int cartID;
-  private boolean seen;
   private final ArrayList<Cart> cartProducts = new ArrayList<>();
   private DBConnection con = new DBConnection();
   private Statement statement;
   private PreparedStatement st;
   private Connection connection;
-  private Cart cart;
   public Cart() throws Exception {
     super("jdbc:mysql://localhost:3306/possys", "root", "");
     this.connection = con.getConnection("jdbc:mysql://localhost:3306/possys", "root", "");
@@ -29,10 +26,6 @@ public class Cart extends QueryCart {
   // setter
   public void setProductName(String productName) {
     this.productName = productName;
-  }
-
-  public void setSeen(boolean seen) {
-    this.seen = seen;
   }
 
   public void setProductPrice(float productPrice) {
@@ -52,11 +45,6 @@ public class Cart extends QueryCart {
   }
 
   // getter
-
-  public boolean isSeen() {
-    return seen;
-  }
-
   public int getProductID() {return productID;}
 
   public String getProductName() {

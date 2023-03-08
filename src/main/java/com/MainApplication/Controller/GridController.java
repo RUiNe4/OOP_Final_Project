@@ -2,10 +2,14 @@ package com.MainApplication.Controller;
 
 import com.ProductManagement.Cart;
 import com.ProductManagement.Product;
+import com.ProductManagement.TempCart;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.SubScene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+
+import java.util.ArrayList;
 
 public class GridController {
   private final SceneController sceneController = new SceneController();
@@ -18,14 +22,18 @@ public class GridController {
   private Label productQty;
   @FXML
   private Label productPrice;
+  private TempCart tempCart;
   private Product product;
-  public GridController() throws Exception {}
-  public void setData(Product product) {
+
+  public GridController() throws Exception {
+  }
+
+  public void setData(TempCart tempCart) {
     try {
-      this.product = product;
-      productName.setText(product.getPname());
-      productPrice.setText(String.valueOf(product.getPprice()));
-      productQty.setText(String.valueOf(product.getPqty()));
+      this.tempCart = tempCart;
+      productName.setText(tempCart.getProductName());
+      productPrice.setText(String.valueOf(tempCart.getProductPrice()));
+      productQty.setText(String.valueOf(tempCart.getProductQty()));
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
@@ -33,14 +41,20 @@ public class GridController {
 
   public void addCart(ActionEvent event) {
     try {
-      product = product.searchProduct(product.getPid());
+      product = new Product();
+      product = product.searchProduct(tempCart.getProductID());
+      System.out.println("[Grid Controller]");
+      tempCart = tempCart.searchTemp(tempCart.getProductID());
+
       cartProduct = new Cart();
-      cartProduct = cartProduct.searchProduct(product.getPid());
-      if (cartProduct == null)
+      cartProduct = cartProduct.searchProduct(tempCart.getProductID());
+
+      if (cartProduct == null) {
         throw new Exception("Null Product");
-      cartProduct.setProductQty(1);
+      }
+      cartProduct.setProductQty(1); // set cart product to 1
       cartProduct.addToCart(
-        product.getPid(),
+        tempCart.getProductID(),
         cartProduct.getProductName(),
         cartProduct.getProductPrice(),
         cartProduct.getProductQty()
@@ -49,17 +63,22 @@ public class GridController {
         cartProduct.getProductID(),
         cartProduct.getProductQty()
       );
-      if(product.getPqty() == 1){
-        product.deleteProduct(product.getPid());
+      if (tempCart.getProductQty() == 0) {
+        tempCart.deleteItem(tempCart.getProductID());
       } else {
-        product.setPqty(product.getPqty()-1);
-        ProductController.setCartProduct(cartProduct);
-      }
-      product.updateProduct(
-        product.getPid(),
-        product.getPqty()
-      );
+        tempCart.setProductQty(tempCart.getProductQty() - 1);
+        if (product.getPqty() - tempCart.getProductQty() == 1) {
+          ProductController.setCartProduct(cartProduct);
+        } else {
+//          cartProduct.setProductQty(cartProduct.getProductQty() + 1);
 
+        }
+      }
+
+      tempCart.updateTempCart(
+        tempCart.getProductID(),
+        tempCart.getProductQty()
+      );
       sceneController.switchSceneButton(event, "product-view.fxml");
     } catch (Exception e) {
       System.out.println(e.getMessage());

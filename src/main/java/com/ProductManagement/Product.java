@@ -8,17 +8,15 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class Product extends QueryProduct{
+public class Product extends QueryProduct {
   private int pid;
   private String pname;
   private int pqty;
   private Double pprice;
-
   private Product product;
   private Statement statement;
   private DBConnection con = new DBConnection();
   private ArrayList<Product> products = new ArrayList<>();
-
 
   public int getPid() {
     return pid;
@@ -134,4 +132,5 @@ public class Product extends QueryProduct{
     }
     return null;
   }
+
 }
